@@ -1,25 +1,24 @@
 <template>
-  <article>
-    <figure
-      v-for="(image, index) in images"
-      :key="index"
-      class="property-card-images"
-    >
-      <img :src="image" alt="" />
-    </figure>
+  <article class="property-card-images">
+    <ClientOnly>
+      <RaizcoCarousel :images="images" />
+    </ClientOnly>
   </article>
 </template>
 
 <script lang="ts" setup>
-const config = useRuntimeConfig();
+import type { ImageType } from "~/types/images.types";
 
-const images: string[] = [
-  "https://www.kasandbox.org/programming-images/avatars/leaf-blue.png",
-  "https://www.kasandbox.org/programming-images/avatars/leaf-green.png",
-  "https://www.kasandbox.org/programming-images/avatars/leaf-red.png",
-  "https://www.kasandbox.org/programming-images/avatars/leaf-grey.png",
-  "https://www.kasandbox.org/programming-images/avatars/leaf-orange.png",
-  "https://www.kasandbox.org/programming-images/avatars/leaf-yellow.png",
+const images: ImageType[] = [
+  {
+    url: "https://cdn.pixabay.com/photo/2016/11/18/17/46/house-1836070_1280.jpg",
+  },
+  {
+    url: "https://cdn.pixabay.com/photo/2022/01/30/19/46/school-6982073_960_720.jpg",
+  },
+  {
+    url: "https://cdn.pixabay.com/photo/2023/12/17/09/47/door-8453898_1280.jpg",
+  },
 ];
 </script>
 
@@ -29,6 +28,15 @@ const images: string[] = [
   width: 100%;
   & img {
     width: 100%;
+  }
+}
+
+:deep(.carousel__viewport) {
+  border-radius: $property-card-border-radius $property-card-border-radius 0 0;
+  & img {
+    height: 218px;
+    width: 100%;
+    object-fit: cover;
   }
 }
 </style>

@@ -10,12 +10,20 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@primevue/nuxt-module": "^4.2.5",
+    "@vesp/nuxt-fontawesome": "^1.1.0",
+    "@vue/runtime-core": "^3.5.13",
     "nuxt": "^3.14.1592",
-    "primevue": "^4.2.5",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "vue3-carousel-nuxt": "^1.1.4"
   },
   "devDependencies": {
-    "sass": "^1.83.0"
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-regular-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@types/node": "^22.10.2",
+    "sass": "^1.83.0",
+    "typescript": "^5.7.2"
   }
 }

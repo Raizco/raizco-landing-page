@@ -1,0 +1,18 @@
+@use "sass:color";
+
+$font-color: #272727;
+$primary-color: #f6b800;
+$grey-color: #cacaca48;
+$property-card-border-radius: 5px;
+
+//Inputs
+$input-inner-padding: 0px 8px;
+$input-width: 300px;
+$input-height: 35px;
+$input-font-size: 16px;
+$input-font-color: $font-color;
+$label-font-size: 14px;
+$input-box-shadow: 0px 0px 3px 1px #cfcfcfcf;
+$input-box-shadow-focus: 0px 0px 2px 1px
+  color.scale($primary-color, $lightness: -5%);
+$input-border-radius: 3px;
