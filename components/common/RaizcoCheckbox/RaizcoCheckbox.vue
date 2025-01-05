@@ -47,7 +47,11 @@ function onChange() {
     background-color: #ffffff;
     outline: none;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.2s;
+    position: relative;
     &:disabled {
       border-color: #c0c0c0;
       background-color: #c0c0c0;
@@ -65,8 +69,9 @@ function onChange() {
         font-size: 1.2em;
         color: #ffffff;
         position: absolute;
-        right: 3px;
-        top: -2.5px;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
       }
     }
   }

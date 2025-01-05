@@ -4,7 +4,7 @@
       class="raizco-button"
       @click="onClick"
       :id="buttonId"
-      :class="{ 'raizco-button--disabled': props.disabled }"
+      :class="bindedClasses"
     >
       <span v-if="prefixIcon" class="raizco-button__icon">
         <font-awesome
@@ -26,6 +26,13 @@ import type { RaizcoButtonProps } from "./raizcoButton.types";
 const emits = defineEmits(["click"]);
 const props = defineProps<RaizcoButtonProps>();
 const buttonId = props.id || generateComponentId({ prefix: "input" });
+
+const bindedClasses = computed(() => {
+  return {
+    "raizco-button--disabled": props.disabled,
+    ...(props.class && { [props.class]: true }),
+  };
+});
 
 function onClick() {
   emits("click");

@@ -7,21 +7,32 @@
           :icon="['fas', 'magnifying-glass']"
           iconColor="#f6b800"
         />
-        <template class="filters-button">
-          <RaizcoButton
-          text="Filtros"
+        <RaizcoButton
+          class="filters-button"
+          :text="$t('filters')"
           :prefixIcon="['fas', 'sliders']"
-          :label="$t('management')"
-          color="primary"
-          />
-        </template>
+          @click="onClickFiltersButton"
+        />
       </section>
     </ContentWrapper>
+    <RaizcoModal v-model="filtersMovalVisibility">
+      <div class="filters-wrapper">
+        <FiltersTitle />
+        <RaizcoDivider />
+      </div>
+      <Filters />
+    </RaizcoModal>
   </nav>
 </template>
 
 <script setup lang="ts">
 import type { RaizcoSelectOption } from "../common/RaizcoSelect/raizcoSelect.types";
+
+const filtersMovalVisibility = ref<boolean>(false);
+
+function onClickFiltersButton() {
+  filtersMovalVisibility.value = !filtersMovalVisibility.value;
+}
 
 function handleSelect(data: RaizcoSelectOption) {
   console.log(data);
@@ -39,10 +50,17 @@ function handleSelect(data: RaizcoSelectOption) {
   }
 }
 
-.filters-button {
-  display: none;
+.filters-wrapper {
+  padding: 20px 20px 0px 20px;
+  background-color: $grey-color;
+}
+
+:deep(.filters-button) {
+  @include respond-to(desktop) {
+    visibility: hidden;
+  }
   @include respond-to(mobile) {
-    display: block;
+    visibility: visible;
   }
 }
 

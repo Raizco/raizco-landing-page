@@ -1,17 +1,8 @@
 <template>
   <nav class="filters">
-    <h2 class="filters__title">{{ $t("filterBy") }}</h2>
+    <FiltersTitle class="filters-title" />
     <section class="filters__content">
       <div class="filters-wrapper">
-        <!-- <article>
-          <h3 class="filter-item__title">{{ $t("propertyName") }}:</h3>
-          <RaizcoInput
-            :placeholder="$t('propertyName')"
-            v-model="inputValue"
-            :icon="['fas', 'magnifying-glass']"
-            iconColor="#cacac6"
-          />
-        </article> -->
         <article>
           <h3 class="filter-item__title">{{ $t("propertyType") }}:</h3>
           <RaizcoSelect
@@ -23,7 +14,7 @@
         <article class="filter-item">
           <h3 class="filter-item__title">{{ $t("businessType") }}:</h3>
           <RaizcoSelect
-          multiple
+            multiple
             :options="options2"
             @change="handleSelect"
             v-model="selectValue2"
@@ -31,11 +22,11 @@
           />
         </article>
       </div>
-      <hr class="filters-divider" />
+      <RaizcoDivider />
       <div class="filters-wrapper">
         <PropertyValueFilter />
       </div>
-      <hr class="filters-divider" />
+      <RaizcoDivider />
       <div class="filters-wrapper">
         <article class="filter-item">
           <h3 class="filter-item__title">{{ $t("rooms") }}:</h3>
@@ -60,7 +51,7 @@
         </article>
         <PropertyAreaFilter />
       </div>
-      <hr class="filters-divider" />
+      <RaizcoDivider />
       <article>
         <h3 class="filter-item__title">{{ $t("propertyFeatures") }}:</h3>
         <RaizcoSelect
@@ -146,7 +137,7 @@ const options2: RaizcoSelectOption[] = [
   {
     label: "Proyecto",
     value: "proyecto",
-  }
+  },
 ];
 
 const multipleSelectorOptions = [
@@ -191,10 +182,8 @@ function handleSelect(data: RaizcoSelectOption) {
   padding: 20px 20px;
   background-color: $grey-color;
   border-radius: 2px;
-  &__title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin: 0px 0px 15px 0px;
+  @include respond-to(mobile) {
+    width: 100%;
   }
   &__content {
     display: flex;
@@ -223,5 +212,11 @@ function handleSelect(data: RaizcoSelectOption) {
   border-top: 1px solid $divider-color;
   width: 100%;
   margin: 5px 0px 8px 0px;
+}
+
+.filters-title {
+  @include respond-to(mobile) {
+    display: none;
+  }
 }
 </style>

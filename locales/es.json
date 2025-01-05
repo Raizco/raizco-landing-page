@@ -1,6 +1,6 @@
 {
     "properties": "Propiedades",
-    "filterBy": "Filtros",
+    "filters": "Filtros",
     "propertyName": "Nombre de la propiedad",
     "searchByKeyWord": "Buscar por palabra clave",
     "propertyType": "Tipo de inmueble",

@@ -27,12 +27,7 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
-  modules: [
-    "@primevue/nuxt-module",
-    "vue3-carousel-nuxt",
-    "@vesp/nuxt-fontawesome",
-    "@nuxtjs/i18n",
-  ],
+  modules: ["@primevue/nuxt-module", "vue3-carousel-nuxt", "@vesp/nuxt-fontawesome", "@nuxtjs/i18n", "@nuxt/ui"],
   fontawesome: {
     icons: {
       solid: [
