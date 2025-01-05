@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxtjs/i18n": "^9.1.1",
     "@primevue/nuxt-module": "^4.2.5",
     "@vesp/nuxt-fontawesome": "^1.1.0",
     "@vue/runtime-core": "^3.5.13",

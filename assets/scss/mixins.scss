@@ -1,3 +1,5 @@
+@use "./variables.scss" as vars;
+
 @mixin text-ellipsis($line-clamp: 1) {
   display: -webkit-box;
   line-clamp: $line-clamp;
@@ -5,4 +7,30 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+@mixin disabled-input {
+  background-color: vars.$input-disabled-background-color;
+  cursor: not-allowed;
+  color: vars.$input-placeholder-color;
+}
+
+@mixin filter-item {
+  &__title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0px 0px 5px 0px;
+  }
+}
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: vars.$mobile-breakpoint) {
+      @content;
+    }
+  } @else if $breakpoint == desktop {
+    @media (min-width: vars.$mobile-breakpoint) {
+      @content;
+    }
+  }
 }

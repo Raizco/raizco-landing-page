@@ -1,9 +1,11 @@
 @use "sass:color";
 
+$mobile-breakpoint: 720px;
 $font-color: #272727;
 $primary-color: #f6b800;
 $grey-color: #cacaca48;
 $property-card-border-radius: 5px;
+$divider-color: #b4b4b4;
 
 //Inputs
 $input-inner-padding: 0px 8px;
@@ -11,8 +13,19 @@ $input-width: 300px;
 $input-height: 35px;
 $input-font-size: 16px;
 $input-font-color: $font-color;
+$input-placeholder-color: #888888b6;
 $label-font-size: 14px;
-$input-box-shadow: 0px 0px 3px 1px #cfcfcfcf;
-$input-box-shadow-focus: 0px 0px 2px 1px
-  color.scale($primary-color, $lightness: -5%);
+$input-box-shadow: 0px 0px 1px 1px #cfcfcfcf;
+$input-box-shadow-focus: 0px 0px 1px 1px
+  color.scale($primary-color, $lightness: 15%);
 $input-border-radius: 3px;
+$input-disabled-background-color: #e4e4e4b7;
+
+//Buttons
+$button-font-size: 16px;
+$button-font-color: #ffffff;
+$button-background-color: $primary-color;
+$button-border-radius: 3px;
+$button-padding: 10px 12px;
+$button-hover-background-color: color.scale($primary-color, $lightness: 20%);
+$button-disabled-background-color: color.scale($primary-color, $lightness: 40%);

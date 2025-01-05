@@ -8,7 +8,7 @@
     width: 100%;
     height: 70px;
     background-color: $primary-color;
-    box-shadow: 0 0 6px #787878;
+    box-shadow: 0 0 6px #787878c0;
     clip-path: inset(0px 0px -10px 0px);
 }
 </style>

@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@use "~/assets/scss/main.scss" as *; @use "~/assets/scss/variables.scss" as *; @use "~/assets/scss/mixins.scss" as *;`,
+          additionalData: `@use "~/assets/scss/main.scss" as *; @use "~/assets/scss/variables.scss" as *; @use "~/assets/scss/mixins.scss" as *; @use "~/assets/scss/fonts.scss" as *;`,
           api: "modern-compiler",
         },
       },
@@ -20,9 +20,7 @@ export default defineNuxtConfig({
       fallbackImages: "https://picsum.photos/500/300",
     },
   },
-  plugins: [
-    "~/plugins/clickOutside.ts",
-  ],
+  plugins: ["~/plugins/clickOutside.ts"],
   components: [
     {
       path: "~/components",
@@ -33,10 +31,13 @@ export default defineNuxtConfig({
     "@primevue/nuxt-module",
     "vue3-carousel-nuxt",
     "@vesp/nuxt-fontawesome",
+    "@nuxtjs/i18n",
   ],
   fontawesome: {
     icons: {
       solid: [
+        "sliders",
+        "magnifying-glass",
         "money-bill",
         "bed",
         "warehouse",
@@ -46,5 +47,8 @@ export default defineNuxtConfig({
         "building",
       ],
     },
+  },
+  i18n: {
+    vueI18n: "./i18n.config.ts",
   },
 });

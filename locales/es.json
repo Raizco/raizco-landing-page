@@ -1,0 +1,20 @@
+{
+    "properties": "Propiedades",
+    "filterBy": "Filtros",
+    "propertyName": "Nombre de la propiedad",
+    "searchByKeyWord": "Buscar por palabra clave",
+    "propertyType": "Tipo de inmueble",
+    "propertyValue": "Precio",
+    "priceFrom": "Desde",
+    "priceTo": "Hasta",
+    "propertyArea": "Área (m²)",
+    "areaFrom": "Desde (m²)",
+    "areaTo": "Hasta (m²)",
+    "businessType": "Tipo de negocio",
+    "rooms": "Habitaciones",
+    "bathrooms": "Baños",
+    "garage": "Garajes",
+    "propertyFeatures": "Características del inmueble",
+    "applyFilters": "Aplicar filtros"
+
+}

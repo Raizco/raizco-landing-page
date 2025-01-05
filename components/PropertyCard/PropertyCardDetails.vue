@@ -3,7 +3,7 @@
     <section class="property-card-header">
       <div class="property-location">
         <font-awesome class="property-location__icon" :icon="['fas', 'location-pin']" />
-        <span class="property-location__text">Medellín</span>
+        <span class="property-location__text">{{ 'Medellín'.toUpperCase() }}</span>
       </div>
     </section>
     <section class="property-value">
@@ -43,7 +43,7 @@ import { computed } from "vue";
 import addDotsToValue from "~/utils/addDotsToValue";
 
 const propertyValue = computed(() => {
-  return `$${addDotsToValue(300000000)}`;
+  return `$ ${addDotsToValue(300000000)}`;
 });
 </script>
 
@@ -56,7 +56,7 @@ const propertyValue = computed(() => {
   padding: 10px 0px 5px 0px;
   display: flex;
   align-items: stretch;
-  font-size: 15px;
+  font-size: 13px;
   gap: 5px;
   &__icon {
     color: $primary-color;
@@ -68,7 +68,7 @@ const propertyValue = computed(() => {
 }
 
 .property-value {
-  padding: 0px 0px;
+  padding: 5px 0px;
   &__text {
     font-size: 20px;
     font-weight: 500;
@@ -81,7 +81,7 @@ const propertyValue = computed(() => {
   color: #6d6d6d;
   &__text {
     @include text-ellipsis(2);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     margin: 0px;
   }

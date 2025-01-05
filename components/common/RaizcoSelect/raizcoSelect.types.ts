@@ -7,5 +7,9 @@ export type RaizcoSelectProps = {
   id?: string;
   tabindex?: number;
   options: RaizcoSelectOption[];
-  default?: string;
+  class?: string;
+  modelValue?: RaizcoSelectOption | RaizcoSelectOption[];
+  placeholder?: string;
+  multiple?: boolean;
+  disabled?: boolean;
 };

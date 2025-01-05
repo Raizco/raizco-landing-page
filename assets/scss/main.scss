@@ -1,6 +1,9 @@
+@use "./variables.scss" as vars;
+
 $app-font: 'Montserrat', sans-serif;
 
 body {
     margin: 0px;
     padding: 0px;
+    color: vars.$font-color;
 }
