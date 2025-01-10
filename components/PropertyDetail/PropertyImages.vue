@@ -1,5 +1,5 @@
 <template>
-  <article class="property-card-images">
+  <article class="property-images">
     <ClientOnly>
       <RaizcoCarousel :images="images" />
     </ClientOnly>
@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { ImageType } from "~/types/images.types";
+import type { ImageType } from "~/types/property/images.type";
 
 const images: ImageType[] = [
   {
@@ -23,7 +23,7 @@ const images: ImageType[] = [
 </script>
 
 <style lang="scss" scoped>
-.property-card-images {
+.property-images {
   margin: 0px;
   width: 100%;
   & img {
@@ -34,9 +34,9 @@ const images: ImageType[] = [
 :deep(.carousel__viewport) {
   border-radius: $property-card-border-radius $property-card-border-radius 0 0;
   & img {
-    height: 218px;
+    height: 400px;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 }
 </style>

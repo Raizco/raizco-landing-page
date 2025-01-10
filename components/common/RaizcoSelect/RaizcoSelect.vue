@@ -16,7 +16,7 @@
         <label
           v-if="multiple"
           class="raizco-select__label"
-          :class="{ placeholder: !selectedMultiple }"
+          :class="{ placeholder: !selectedMultiple.length }"
         >
           {{ selectedMultipleLabel }}
         </label>
@@ -68,6 +68,9 @@ const selectedLabel = computed(() => {
 });
 
 const selectedMultipleLabel = computed(() => {
+  if (!selectedMultiple.value.length) {
+    return props.placeholder || "Seleccionar";
+  }
   return selectedMultiple.value.map((item) => item.label).join(", ");
 });
 
@@ -141,6 +144,7 @@ function setDefaultValue(): RaizcoSelectOption | undefined {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: $input-font-color;
   }
   &__selected {
     background-color: #ffffff;

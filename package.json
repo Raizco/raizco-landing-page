@@ -10,22 +10,26 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/ui": "^2.20.0",
-    "@nuxtjs/i18n": "^9.1.1",
-    "@primevue/nuxt-module": "^4.2.5",
-    "@vesp/nuxt-fontawesome": "^1.1.0",
-    "@vue/runtime-core": "^3.5.13",
-    "nuxt": "^3.14.1592",
+    "@coders-tm/vue-number-format": "^3.35.2",
+    "@nuxt/ui": "2.20.0",
+    "@nuxtjs/i18n": "9.1.1",
+    "@pinia/nuxt": "^0.9.0",
+    "@vesp/nuxt-fontawesome": "1.1.0",
+    "@vue/runtime-core": "3.5.13",
+    "axios": "1.7.9",
+    "nuxt": "3.14.1592",
+    "nuxt-viewport": "^2.2.0",
     "vue": "latest",
     "vue-router": "latest",
-    "vue3-carousel-nuxt": "^1.1.4"
+    "vue3-carousel-nuxt": "1.1.4"
   },
   "devDependencies": {
-    "@fortawesome/free-brands-svg-icons": "^6.7.2",
-    "@fortawesome/free-regular-svg-icons": "^6.7.2",
-    "@fortawesome/free-solid-svg-icons": "^6.7.2",
-    "@types/node": "^22.10.2",
-    "sass": "^1.83.0",
-    "typescript": "^5.7.2"
+    "@fortawesome/free-brands-svg-icons": "6.7.2",
+    "@fortawesome/free-regular-svg-icons": "6.7.2",
+    "@fortawesome/free-solid-svg-icons": "6.7.2",
+    "@types/node": "22.10.2",
+    "pinia": "2.3.0",
+    "sass": "1.83.0",
+    "typescript": "5.7.2"
   }
 }

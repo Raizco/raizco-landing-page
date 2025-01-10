@@ -2,8 +2,13 @@
   <div class="property-card-details">
     <section class="property-card-header">
       <div class="property-location">
-        <font-awesome class="property-location__icon" :icon="['fas', 'location-pin']" />
-        <span class="property-location__text">{{ 'Medellín'.toUpperCase() }}</span>
+        <font-awesome
+          class="property-location__icon"
+          :icon="['fas', 'location-pin']"
+        />
+        <span class="property-location__text">{{
+          data.location.cityName.toUpperCase()
+        }}</span>
       </div>
     </section>
     <section class="property-value">
@@ -11,26 +16,39 @@
     </section>
     <section class="property-name">
       <p class="property-name__text">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores optio
-        quas id quibusdam voluptatibus, minima fugiat possimus mollitia ducimus
-        beatae, quia quaerat amet cupiditate sed cumque magnam neque nam?
-        Tenetur!
+        {{ data.name }}
       </p>
     </section>
     <hr class="divider" />
     <footer>
       <ul class="property-features">
         <li class="property-features__item">
-          <font-awesome class="property-features__item-icon" :icon="['fas', 'ruler-combined']" />
-          <span>60 m²</span>
+          <font-awesome
+            class="property-features__item-icon"
+            :icon="['fas', 'ruler-combined']"
+          />
+          <span>{{ data.generalData.totalArea }} m²</span>
         </li>
         <li class="property-features__item">
-          <font-awesome class="property-features__item-icon" :icon="['fas', 'bed']" />
-          <span>2</span>
+          <font-awesome
+            class="property-features__item-icon"
+            :icon="['fas', 'bed']"
+          />
+          <span>{{ data.generalData.bedrooms }}</span>
         </li>
         <li class="property-features__item">
-          <font-awesome class="property-features__item-icon" :icon="['fas', 'bath']" />
-          <span>1</span>
+          <font-awesome
+            class="property-features__item-icon"
+            :icon="['fas', 'bath']"
+          />
+          <span>{{ data.generalData.bathrooms }}</span>
+        </li>
+        <li class="property-features__item">
+          <font-awesome
+            class="property-features__item-icon"
+            :icon="['fas', 'warehouse']"
+          />
+          <span>{{ data.generalData.garage }}</span>
         </li>
       </ul>
     </footer>
@@ -38,12 +56,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-
+import type { PropertyCardDetailsProps } from "./propertyCardDetails.type";
 import addDotsToValue from "~/utils/addDotsToValue";
 
+const props = defineProps<PropertyCardDetailsProps>();
+
 const propertyValue = computed(() => {
-  return `$ ${addDotsToValue(300000000)}`;
+  const value =
+    props.data.generalData.saleValue || props.data.generalData.rentValue || 0;
+  return `$ ${addDotsToValue(value)}`;
 });
 </script>
 
@@ -53,9 +74,9 @@ const propertyValue = computed(() => {
 }
 
 .property-location {
-  padding: 10px 0px 5px 0px;
+  padding: 10px 0px 0px 0px;
   display: flex;
-  align-items: stretch;
+  align-items: center;
   font-size: 13px;
   gap: 5px;
   &__icon {
@@ -68,7 +89,7 @@ const propertyValue = computed(() => {
 }
 
 .property-value {
-  padding: 5px 0px;
+  padding: 2px 0px;
   &__text {
     font-size: 20px;
     font-weight: 500;
@@ -77,13 +98,14 @@ const propertyValue = computed(() => {
 }
 
 .property-name {
-  padding: 5px 0px 7px 0px;
+  padding: 0px 0px 7px 0px;
   color: #6d6d6d;
   &__text {
     @include text-ellipsis(2);
     font-size: 14px;
     font-weight: 500;
     margin: 0px;
+    min-height: 42px;
   }
 }
 
@@ -99,9 +121,10 @@ const propertyValue = computed(() => {
   gap: 15px;
   &__item {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     gap: 5px;
     font-size: 14px;
+    color: $font-color;
   }
 }
 </style>

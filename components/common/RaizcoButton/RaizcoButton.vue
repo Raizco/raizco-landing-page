@@ -53,6 +53,7 @@ function onClick() {
   padding: $button-padding;
   font-family: $app-font;
   font-weight: 500;
+  outline: none;
   cursor: pointer;
   transition: all 0.1s;
   &__icon {

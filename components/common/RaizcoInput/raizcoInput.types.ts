@@ -1,5 +1,10 @@
 import type { IconType } from "~/types/icon.type";
 
+export type RaizcoInputFormatter = {
+  currency: Record<string, any>;
+  thousands: Record<string, any>;
+}
+
 export type RaizcoInputProps = {
   id?: string;
   label?: string;
@@ -7,7 +12,7 @@ export type RaizcoInputProps = {
   placeholder?: string;
   class?: string;
   modelValue?: string;
-  icon?: IconType
+  icon?: IconType;
   iconColor?: string;
   disabled?: boolean;
 };

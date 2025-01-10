@@ -1,4 +1,5 @@
 export type RaizcoSelectOption = {
+  id?: any;
   value: string;
   label: string;
 };

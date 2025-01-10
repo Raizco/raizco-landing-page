@@ -8,7 +8,7 @@ export default {};
 
 <style lang="scss" scoped>
 .filters-title {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
   margin: 0px 0px 15px 0px;
 }

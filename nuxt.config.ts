@@ -2,7 +2,6 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
-  // css: ["~/assets/scss/main.scss"],
   vite: {
     css: {
       preprocessorOptions: {
@@ -16,18 +15,25 @@ export default defineNuxtConfig({
   runtimeConfig: {
     apiSecret: "123",
     public: {
-      apiBase: "/api",
+      apiBaseUrl:
+        process.env.NUXT_PUBLIC_API_BASE_URL || "https://default.api.com",
       fallbackImages: "https://picsum.photos/500/300",
     },
   },
-  plugins: ["~/plugins/clickOutside.ts"],
+  plugins: ["~/plugins/clickOutside.ts", "~/plugins/api.ts",],
   components: [
     {
       path: "~/components",
       pathPrefix: false,
     },
   ],
-  modules: ["@primevue/nuxt-module", "vue3-carousel-nuxt", "@vesp/nuxt-fontawesome", "@nuxtjs/i18n", "@nuxt/ui"],
+  modules: ["vue3-carousel-nuxt", "@vesp/nuxt-fontawesome", "@nuxtjs/i18n", "@nuxt/ui", "@pinia/nuxt", "nuxt-viewport"],
+  viewport: {
+    breakpoints: {
+      tablet: 720,
+      desktop: 721,
+    }
+  },
   fontawesome: {
     icons: {
       solid: [
@@ -40,6 +46,7 @@ export default defineNuxtConfig({
         "ruler-combined",
         "location-pin",
         "building",
+        "xmark",
       ],
     },
   },

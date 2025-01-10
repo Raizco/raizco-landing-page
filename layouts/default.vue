@@ -9,6 +9,14 @@
   </div>
 </template>
 
+<script lang="ts" setup>
+import { usePropertiesStore } from "~/store/properties";
+
+const propertiesStore = usePropertiesStore();
+
+propertiesStore.getPicklists();
+</script>
+
 <style lang="scss" sci>
 .main-layout {
   font-family: $app-font;

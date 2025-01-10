@@ -5,34 +5,57 @@
         {{ label }}
       </label>
     </div>
-    <div class="raizco-input-container" :class="{ 'raizco-input-container--disabled': disabled }">
+    <div
+      class="raizco-input-container"
+      :class="{ 'raizco-input-container--disabled': disabled }"
+    >
       <span v-if="icon" class="raizco-input__icon">
-        <font-awesome
-          :icon="icon"
-          :style="{ color: iconColor }"
-        />
+        <font-awesome :icon="icon" :style="{ color: iconColor }" />
       </span>
       <ClientOnly>
         <input
+          v-if="type === 'text' || type === 'number'"
           class="raizco-input-container__input"
           :class="{ 'raizco-input-container--disabled': disabled }"
           :id="inputId"
-          :type="type"
           :placeholder="placeholder"
           :disabled="disabled"
+          :type="type"
+          min="0"
           v-model="value"
           @change="onChange"
           @input="onInput"
           @blur="onBlur"
           @focus="onFocus"
+          @keyup.enter="onPressEnter"
+          ref="inputRef"
         />
+        <vue-number
+          v-else
+          class="raizco-input-container__input"
+          :class="{ 'raizco-input-container--disabled': disabled }"
+          v-model="value"
+          v-bind="inputOptions"
+          :id="inputId"
+          :placeholder="placeholder"
+          :disabled="disabled"
+          @change="onChange"
+          @input="onInput"
+          @blur="onBlur"
+          @focus="onFocus"
+          @keyup.enter="onPressEnter"
+        ></vue-number>
       </ClientOnly>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { RaizcoInputProps } from "./raizcoInput.types";
+import type {
+  RaizcoInputFormatter,
+  RaizcoInputProps,
+} from "./raizcoInput.types";
+import { component as VueNumber } from "@coders-tm/vue-number-format";
 
 const emits = defineEmits([
   "update:modelValue",
@@ -40,34 +63,54 @@ const emits = defineEmits([
   "input",
   "blur",
   "focus",
+  "enter",
 ]);
-const props = defineProps<RaizcoInputProps>();
 
-const value = ref<string>(props.modelValue || "");
+const props = withDefaults(defineProps<RaizcoInputProps>(), {
+  type: "text",
+});
 
 const inputId = props.id || generateComponentId({ prefix: "input" });
 
+const value = ref<string>(props.modelValue || "");
+
+const inputFormatOptions: RaizcoInputFormatter = {
+  currency: {
+    separator: ".",
+    prefix: "$ ",
+    masked: false,
+  },
+  thousands: {
+    separator: ".",
+    masked: false,
+  },
+};
+
+const inputOptions = ref(
+  inputFormatOptions[props.type as keyof RaizcoInputFormatter]
+);
+
 function onChange(event: Event) {
-  const target = event.target as HTMLInputElement;
-  value.value = target.value;
-  emits("update:modelValue", target.value);
-  emits("change", target.value);
+  emits("update:modelValue", value.value);
+  emits("change", value.value);
 }
 
 function onInput(event: Event) {
-  const target = event.target as HTMLInputElement;
-  value.value = target.value;
-  emits("input", target.value);
+  // const target = event.target as HTMLInputElement;
+  value.value = value.value;
+  emits("input", value.value);
 }
 
 function onBlur(event: Event) {
-  const target = event.target as HTMLInputElement;
-  emits("blur", target.value);
+  emits("blur", value.value);
 }
 
 function onFocus(event: Event) {
-  const target = event.target as HTMLInputElement;
-  emits("focus", target.value);
+  emits("focus", value.value);
+}
+
+function onPressEnter(event: Event) {
+  emits("enter", value.value);
 }
 </script>
 
@@ -104,7 +147,7 @@ function onFocus(event: Event) {
     height: 100%;
     font-size: $input-font-size;
     font-family: "Montserrat", sans-serif;
-    outline: none;
+    outline: none !important;
     border: none;
     padding: 0px;
     border-radius: $input-border-radius;
@@ -112,10 +155,10 @@ function onFocus(event: Event) {
     &::placeholder {
       color: $input-placeholder-color;
       text-overflow: ellipsis;
-      
+      font-size: $input-font-size;
     }
   }
-  &--disabled{
+  &--disabled {
     @include disabled-input;
   }
 }

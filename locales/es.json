@@ -1,5 +1,7 @@
 {
     "properties": "Propiedades",
+    "sale": "Venta",
+    "rent": "Arriendo",
     "filters": "Filtros",
     "propertyName": "Nombre de la propiedad",
     "searchByKeyWord": "Buscar por palabra clave",
@@ -14,7 +16,8 @@
     "rooms": "Habitaciones",
     "bathrooms": "Baños",
     "garage": "Garajes",
-    "propertyFeatures": "Características del inmueble",
+    "internalFeatures": "Características internas",
+    "externalFeatures": "Características externas",
     "applyFilters": "Aplicar filtros"
 
 }

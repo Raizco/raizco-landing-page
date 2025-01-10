@@ -6,6 +6,8 @@
           :placeholder="$t('searchByKeyWord')"
           :icon="['fas', 'magnifying-glass']"
           iconColor="#f6b800"
+          @enter="fetchPropertiesByName"
+          @change="onChangeInput"
         />
         <RaizcoButton
           class="filters-button"
@@ -15,27 +17,34 @@
         />
       </section>
     </ContentWrapper>
-    <RaizcoModal v-model="filtersMovalVisibility">
-      <div class="filters-wrapper">
-        <FiltersTitle />
-        <RaizcoDivider />
-      </div>
-      <Filters />
+    <RaizcoModal
+      v-model="filtersMovalVisibility"
+      header
+      :title="$t('filters')"
+      closeButton
+    >
+      <Filters @filters-applied="filtersMovalVisibility = false"/>
     </RaizcoModal>
   </nav>
 </template>
 
 <script setup lang="ts">
-import type { RaizcoSelectOption } from "../common/RaizcoSelect/raizcoSelect.types";
+import { usePropertiesStore } from "~/store/properties";
 
+const propertiesStore = usePropertiesStore();
 const filtersMovalVisibility = ref<boolean>(false);
 
 function onClickFiltersButton() {
   filtersMovalVisibility.value = !filtersMovalVisibility.value;
 }
 
-function handleSelect(data: RaizcoSelectOption) {
-  console.log(data);
+function fetchPropertiesByName(value: string) {
+  propertiesStore.filters.propertyName = value;
+  propertiesStore.getPropertiesWithFilters();
+}
+
+function onChangeInput(value: string) {
+  propertiesStore.filters.propertyName = value;
 }
 </script>
 
