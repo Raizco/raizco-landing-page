@@ -31,6 +31,7 @@ const bindedClasses = computed(() => {
   return {
     "raizco-button--disabled": props.disabled,
     ...(props.class && { [props.class]: true }),
+    "raizco-button--secondary": props.secondary,
   };
 });
 
@@ -67,6 +68,14 @@ function onClick() {
     cursor: not-allowed;
     &:hover {
       background-color: $button-disabled-background-color;
+    }
+  }
+  &--secondary {
+    background-color: #FFFFFF;
+    color: $font-color;
+    border: 1px solid $primary-color;
+    &:hover {
+      background-color: #f3f3f3;
     }
   }
 }

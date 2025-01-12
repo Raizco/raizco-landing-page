@@ -1,4 +1,10 @@
+export type FeatureType = {
+  id: string | null;
+  label: string;
+  value: string;
+}
+
 export type FeaturesType = {
-  internalFeatures: string[];
-  externalFeatures: string[];
+  internalFeatures: FeatureType[];
+  externalFeatures: FeatureType[];
 };

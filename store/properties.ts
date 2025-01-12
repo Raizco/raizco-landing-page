@@ -16,7 +16,7 @@ export const usePropertiesStore = defineStore("properties", {
     itemsPerPage: 20,
     totalItems: 0,
   }),
-  actions: {
+  actions : {
     async getProperties(): Promise<void> {
       const { fetchProperties } = usePropertiesService();
       const { mapProperties } = usePropertyMapper();
@@ -32,6 +32,7 @@ export const usePropertiesStore = defineStore("properties", {
     async getPropertiesWithFilters(): Promise<void> {
       const { fetchPropertiesWithFilters } = usePropertiesService();
       const { mapProperties } = usePropertyMapper();
+      
       const filters = PropertiesFiltersDto.create(
         {
           ...this.filters,

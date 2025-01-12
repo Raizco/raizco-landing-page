@@ -3,4 +3,5 @@ export type RaizcoModalProps = {
     closeButton?: boolean;
     header?: boolean;
     title?: string;
+    fullscreen?: boolean;
 }

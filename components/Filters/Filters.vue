@@ -82,8 +82,6 @@ const emits = defineEmits(["filtersApplied"]);
 
 const propertiesStore = usePropertiesStore();
 
-const multipleSelectorValue = ref<RaizcoMultipleSelectorOption[]>([]);
-
 function onPropertyTypeChange(data: RaizcoSelectOption[]) {
   propertiesStore.filters.propertyType = data;
 }
@@ -109,6 +107,7 @@ function onChangeGarages(value: RaizcoMultipleSelectorOption[]) {
 }
 
 function onApplyFilters() {
+  propertiesStore.page = 1;
   propertiesStore.getPropertiesWithFilters();
   emits("filtersApplied");
 }

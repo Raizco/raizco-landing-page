@@ -11,7 +11,7 @@ export const usePropertyMapper = () => {
   const mapProperty = (property: any): PropertyType => ({
     id: property.property_id,
     name: property.general_data.property_name,
-    description: property.description,
+    description: property.description.description,
     generalData: mapGeneralData(property.general_data),
     location: mapLocation(property.location),
     features: mapFeatures(property.features),
@@ -22,6 +22,5 @@ export const usePropertyMapper = () => {
     return properties.map(mapProperty);
   }
    
-
   return { mapProperty, mapProperties };
 };

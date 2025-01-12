@@ -18,6 +18,13 @@
     "garage": "Garajes",
     "internalFeatures": "Características internas",
     "externalFeatures": "Características externas",
-    "applyFilters": "Aplicar filtros"
-
+    "internal": "Internas",
+    "external": "Externas",
+    "applyFilters": "Aplicar filtros",
+    "description": "Descripción",
+    "location": "Ubicación",
+    "builtArea": "Área construida",
+    "propertyFeatures": "Características de la propiedad",
+    "knowMoreAboutProperty": "¿Te gustaría saber más de este inmueble?",
+    "contactConsultant": "Contactar un asesor"
 }

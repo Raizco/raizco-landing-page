@@ -8,4 +8,5 @@ export type RaizcoButtonProps = {
   prefixIcon?: IconType;
   suffixIcon?: IconType;
   prefixIconColor?: string;
+  secondary?: boolean;
 };

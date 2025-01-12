@@ -23,14 +23,14 @@ useRouter();
 const props = defineProps<PropertyCardProps>();
 
 function onClick() {
-  navigateTo(`/inmueble/${props.data.name}-${props.data.id}`);
+    const baseUrl = window.location.origin;
+    window.open(`${baseUrl}/inmueble/${props.data.name}-${props.data.id}`, "_blank");
 }
 </script>
 
 <style lang="scss" scoped>
 .property-card {
-  // max-width: 330px;
-  height: 360px;
+  height: 370px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   cursor: pointer;

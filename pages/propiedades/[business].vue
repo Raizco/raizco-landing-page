@@ -4,7 +4,7 @@
     <ContentWrapper>
       <div class="main-content-wrapper">
         <section class="properties-section">
-          <article class="filters-wrapper" v-if="!$viewport.isLessOrEquals('tablet')">
+          <article class="filters-wrapper" v-if="$viewport.isGreaterThan('tablet')">
             <Filters />
           </article>
           <article class="property-cards-list">
@@ -61,7 +61,7 @@ async function onChangePagination() {
 
 <style lang="scss" scoped>
 .main-content-wrapper {
-  margin: 20px 0px 30px 0px;
+  @include main-content-wrapper;
 }
 
 .properties-section {

@@ -98,7 +98,7 @@ const propertyValue = computed(() => {
 }
 
 .property-name {
-  padding: 0px 0px 7px 0px;
+  padding: 0px 0px 8px 0px;
   color: #6d6d6d;
   &__text {
     @include text-ellipsis(2);
@@ -116,7 +116,7 @@ const propertyValue = computed(() => {
 .property-features {
   list-style-type: none;
   margin: 0px;
-  padding: 5px 0px;
+  padding: 9px 0px 5px 0px;
   display: flex;
   gap: 15px;
   &__item {

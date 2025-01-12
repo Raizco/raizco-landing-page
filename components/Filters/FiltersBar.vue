@@ -39,6 +39,7 @@ function onClickFiltersButton() {
 }
 
 function fetchPropertiesByName(value: string) {
+  propertiesStore.page = 1;
   propertiesStore.filters.propertyName = value;
   propertiesStore.getPropertiesWithFilters();
 }

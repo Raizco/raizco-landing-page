@@ -1,5 +1,5 @@
 <template>
-  <UModal v-model="modalVisibility">
+  <UModal v-model="modalVisibility" :fullscreen="fullscreen">
     <header class="raizco-modal-header" v-if="header">
       <div class="raizco-modal-header__content-wrapper">
         <ClientOnly>
@@ -16,7 +16,6 @@
       <RaizcoDivider v-if="header" />
     </header>
     <slot>
-      <Filters />
     </slot>
   </UModal>
 </template>

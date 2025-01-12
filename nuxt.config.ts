@@ -15,24 +15,32 @@ export default defineNuxtConfig({
   runtimeConfig: {
     apiSecret: "123",
     public: {
-      apiBaseUrl:
-        process.env.NUXT_PUBLIC_API_BASE_URL || "https://default.api.com",
-      fallbackImages: "https://picsum.photos/500/300",
+      apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
     },
   },
-  plugins: ["~/plugins/clickOutside.ts", "~/plugins/api.ts",],
+  plugins: ["~/plugins/clickOutside.ts", "~/plugins/api.ts"],
   components: [
     {
       path: "~/components",
       pathPrefix: false,
     },
   ],
-  modules: ["vue3-carousel-nuxt", "@vesp/nuxt-fontawesome", "@nuxtjs/i18n", "@nuxt/ui", "@pinia/nuxt", "nuxt-viewport"],
+  modules: [
+    "vue3-carousel-nuxt",
+    "@vesp/nuxt-fontawesome",
+    "@nuxtjs/i18n",
+    "@nuxt/ui",
+    "@pinia/nuxt",
+    "nuxt-viewport",
+    "@nuxtjs/leaflet",
+    "@vueuse/nuxt",
+  ],
   viewport: {
     breakpoints: {
-      tablet: 720,
       desktop: 721,
-    }
+      tablet: 720,
+      mobile: 600,
+    },
   },
   fontawesome: {
     icons: {
@@ -47,6 +55,9 @@ export default defineNuxtConfig({
         "location-pin",
         "building",
         "xmark",
+        "bars",
+        "phone",
+        "clock"
       ],
     },
   },
