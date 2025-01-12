@@ -2,7 +2,7 @@
   <div class="main-layout">
     <Header />
     <main>
-      <section v-if="Object.keys(propertiesStore.picklists).length" class="main-content">
+      <section class="main-content">
         <NuxtPage />
       </section>
     </main>
