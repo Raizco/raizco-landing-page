@@ -24,7 +24,7 @@
               <PropertyDetailFeatures />
             </div>
             <div
-              class="conctact-wrapper"
+              class="contact-wrapper"
               v-if="$viewport.isGreaterOrEquals('desktop')"
             >
               <hr class="vertical-divider" />
