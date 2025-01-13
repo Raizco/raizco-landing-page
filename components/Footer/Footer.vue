@@ -16,7 +16,7 @@
               class="property-location__icon"
               :icon="['fas', 'phone']"
             />
-            <span>310 552 7265</span>
+            <span>310 522 7265</span>
           </li>
           <li class="contact-info-list__item">
             <font-awesome

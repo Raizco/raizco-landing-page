@@ -24,7 +24,7 @@ const props = defineProps<PropertyCardProps>();
 
 function onClick() {
     const baseUrl = window.location.origin;
-    window.open(`${baseUrl}/inmueble/${props.data.name}-${props.data.id}`, "_blank");
+    window.open(`${baseUrl}/inmueble/${removeWhiteSpaces(props.data.name, "_")}-${props.data.id}`, "_blank");
 }
 </script>
 

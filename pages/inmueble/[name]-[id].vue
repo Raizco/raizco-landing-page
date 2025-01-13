@@ -44,6 +44,7 @@
 
 <script setup lang="ts">
 import { usePropertyDetailStore } from "~/store/propertyDetail";
+import NoImage from "../../assets/images/no-image.png";
 
 const route = useRoute();
 const { $viewport } = useNuxtApp();
@@ -63,47 +64,16 @@ watchEffect(() => {
   if (dataExists.value) {
     const property = propertyDetailStore.data;
 
-    useHead({
-      title: `${property.name} | Raizco`,
-      meta: [
-        {
-          name: "description",
-          content:
-            property.description || "Discover amazing properties with Raizco.",
-        },
-        {
-          property: "og:title",
-          content: property.name,
-        },
-        {
-          property: "og:description",
-          content: property.description,
-        },
-        {
-          property: "og:image",
-          content: property.images?.[0]?.url || "/default-image.jpg",
-        },
-        {
-          property: "og:url",
-          content: `https://example.com/properties/${propertyId}`,
-        },
-        {
-          name: "twitter:card",
-          content: "summary_large_image",
-        },
-        {
-          name: "twitter:title",
-          content: property.name,
-        },
-        {
-          name: "twitter:description",
-          content: property.description,
-        },
-        {
-          name: "twitter:image",
-          content: property.images?.[0]?.url || "/default-image.jpg",
-        },
-      ],
+    useSeoMeta({
+      title: () => `${property.name} | Raizco`,
+      ogTitle: () => `${property.name} | Raizco`,
+      description: () => property.description,
+      ogDescription: () => property.description,
+      ogImage: () => property.images?.[0]?.url || NoImage,
+      ogUrl: () => `${window.location.origin}/properties/${propertyId}`,
+      twitterTitle: () => `${property.name} | Raizco`,
+      twitterDescription: () => property.description,
+      twitterImage: () => property.images?.[0]?.url || NoImage,
     });
   }
 });
