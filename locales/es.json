@@ -23,6 +23,7 @@
     "applyFilters": "Aplicar filtros",
     "description": "Descripción",
     "location": "Ubicación",
+    "address": "Dirección",
     "builtArea": "Área construida",
     "propertyFeatures": "Características de la propiedad",
     "knowMoreAboutProperty": "¿Te gustaría saber más de este inmueble?",

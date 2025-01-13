@@ -1,10 +1,8 @@
 <template>
-  <header>
-    <DesktopHeader v-if="$viewport.isGreaterThan('tablet')"/>
-    <ResponsiveHeader v-else />
+  <header class="header">
+    <DesktopHeader class="header__desktop" />
+    <ResponsiveHeader class="header__responsive" />
   </header>
 </template>
 
-<script lang="ts" setup>
-const { $viewport } = useNuxtApp();
-</script>
+<script lang="ts" setup></script>

@@ -34,6 +34,20 @@ import type { PropertyManagementType } from "~/types/property/propertyManagement
 const { $viewport } = useNuxtApp()
 const route = useRoute();
 
+useHead({
+  title: "Propiedades",
+  meta: [
+    {
+      name: "description",
+      content: "Propiedades",
+    },
+    {
+      name: "keywords",
+      content: "Propiedades",
+    },
+  ],
+});
+
 definePageMeta({
   middleware: ["propiedades"],
 });

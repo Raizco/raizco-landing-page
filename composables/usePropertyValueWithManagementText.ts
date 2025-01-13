@@ -9,7 +9,7 @@ export function usePropertyValueWithManagementText() {
 
   const propertyManagement = computed(() => {
     let value: string;
-    const management = propertyDetailStore.data.generalData.management;
+    const management = propertyDetailStore.data.generalData?.management;
     if(!management) return capitalizeFirstLetter(PropertyManagementType.SALE);
     if (
       management.some((item) => item === BackendPropertyManagementType.RENT)
@@ -23,7 +23,7 @@ export function usePropertyValueWithManagementText() {
 
   const propertyValue = computed(() => {
     let value;
-    const management = propertyDetailStore.data.generalData.management;
+    const management = propertyDetailStore.data.generalData?.management;
     if(!management) return "$0";
     if (
       management.some((item) => item === BackendPropertyManagementType.RENT)

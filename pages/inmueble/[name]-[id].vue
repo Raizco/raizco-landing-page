@@ -1,14 +1,13 @@
 <template>
   <div>
     <PropertyDetailFooter
-      :show="!isVisible && $viewport.isLessOrEquals('tablet')"
+      :show="!headerIsVisible && $viewport.isLessOrEquals('tablet')"
     />
     <ContentWrapper>
       <article class="property-detail-page">
         <div v-if="dataExists">
-          <PropertyDetailHeader ref="elementRef" />
+          <PropertyDetailHeader ref="headerRef" />
           <PropertyImages
-            v-if="dataExists"
             :images="propertyDetailStore.data.images"
           ></PropertyImages>
           <PropertyDetailMainFeatures />
@@ -24,11 +23,17 @@
               </section>
               <PropertyDetailFeatures />
             </div>
-            <div v-if="$viewport.isGreaterOrEquals('desktop')">
+            <div
+              class="conctact-wrapper"
+              v-if="$viewport.isGreaterOrEquals('desktop')"
+            >
               <hr class="vertical-divider" />
               <PropertyDetailContact />
             </div>
           </section>
+          <PropertyDetailAddress
+            v-if="propertyDetailStore.data.location.address"
+          />
           <RaizcoDivider />
           <PropertyDetailLocation />
         </div>
@@ -39,13 +44,12 @@
 
 <script setup lang="ts">
 import { usePropertyDetailStore } from "~/store/propertyDetail";
-import { useIsVisible } from "~/composables/useIsVisible";
 
 const route = useRoute();
 const { $viewport } = useNuxtApp();
 const propertyId = route.params.id;
-const elementRef = ref<HTMLElement | null>(null);
-const { isVisible, observeElement } = useIsVisible();
+const headerRef = ref<HTMLElement | null>(null);
+const headerIsVisible = ref<boolean>(false);
 
 const propertyDetailStore = usePropertyDetailStore();
 
@@ -55,10 +59,57 @@ const dataExists = computed(() => {
   return Object.keys(propertyDetailStore.data).length > 0;
 });
 
-onMounted(() => {
-  if (elementRef) {
-    observeElement(elementRef.value);
+watchEffect(() => {
+  if (dataExists.value) {
+    const property = propertyDetailStore.data;
+
+    useHead({
+      title: `${property.name} | Raizco`,
+      meta: [
+        {
+          name: "description",
+          content:
+            property.description || "Discover amazing properties with Raizco.",
+        },
+        {
+          property: "og:title",
+          content: property.name,
+        },
+        {
+          property: "og:description",
+          content: property.description,
+        },
+        {
+          property: "og:image",
+          content: property.images?.[0]?.url || "/default-image.jpg",
+        },
+        {
+          property: "og:url",
+          content: `https://example.com/properties/${propertyId}`,
+        },
+        {
+          name: "twitter:card",
+          content: "summary_large_image",
+        },
+        {
+          name: "twitter:title",
+          content: property.name,
+        },
+        {
+          name: "twitter:description",
+          content: property.description,
+        },
+        {
+          name: "twitter:image",
+          content: property.images?.[0]?.url || "/default-image.jpg",
+        },
+      ],
+    });
   }
+});
+
+useIntersectionObserver(headerRef, ([entry]) => {
+  headerIsVisible.value = entry?.isIntersecting;
 });
 
 onUnmounted(() => {
@@ -75,7 +126,6 @@ onUnmounted(() => {
   @include property-detail-section;
   &--description {
     margin-top: 0px;
-    margin-bottom: 20px;
   }
 }
 
@@ -90,9 +140,12 @@ onUnmounted(() => {
 }
 
 .vertical-divider {
-  border: none;
   border-left: 1px solid $divider-color;
   height: auto;
   width: 1px;
+}
+
+.contact-wrapper {
+  display: flex;
 }
 </style>

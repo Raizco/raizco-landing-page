@@ -61,7 +61,11 @@ const openSidebar = ref<boolean>(false);
 @include header;
 
 .app-header {
+  display: none;
   justify-content: space-between;
+  @include respond-to("mobile") {
+    display: flex;
+  }
 }
 
 .header-menu-logo {

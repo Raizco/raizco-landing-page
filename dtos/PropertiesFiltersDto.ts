@@ -117,7 +117,6 @@ export class PropertiesFiltersDto {
   }
 
   private setQuantityArray(data: RaizcoMultipleSelectorOption[]): number[] {
-    console.log(data)
     return data.map((item) => Number(item.value));
   }
 }
