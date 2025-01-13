@@ -16,7 +16,10 @@ import { usePropertiesStore } from "~/store/properties";
 useHead({
   htmlAttrs: {
     class: 'light-mode'
-  }
+  },
+  link: [
+    { rel: 'icon', type: 'image/png', href: '/raizco-logo-192.png' },
+  ],
 })
 
 const propertiesStore = usePropertiesStore();
