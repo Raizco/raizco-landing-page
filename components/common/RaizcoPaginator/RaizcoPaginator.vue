@@ -1,5 +1,5 @@
 <template>
-  <UPagination v-model="page" :page-count="pageCount" :total="total"/>
+  <UPagination v-model="page" :page-count="pageCount" :total="total" />
 </template>
 
 <script setup lang="ts">
@@ -11,6 +11,12 @@ const props = defineProps<RaizcoPaginatorProps>();
 
 const page = ref<number>(props.modelValue || 1);
 
+watch(
+  () => props.modelValue,
+  (newVal) => {
+    page.value = newVal || 1;
+  }
+);
 
 watch(page, () => {
   emits("update:modelValue", page.value);
