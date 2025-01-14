@@ -12,13 +12,18 @@ export default defineNuxtConfig({
       },
     },
   },
+  colorMode: {
+    preference: "light",
+    fallback: "light",
+    classSuffix: "",
+  },
   runtimeConfig: {
     apiSecret: "123",
     public: {
       apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
     },
   },
-  plugins: ["~/plugins/clickOutside.ts", "~/plugins/api.ts"],
+  plugins: ["~/plugins/clickOutside.ts", "~/plugins/api.ts", "~/plugins/uiColorTheme.ts"],
   components: [
     {
       path: "~/components",
@@ -64,4 +69,7 @@ export default defineNuxtConfig({
   i18n: {
     vueI18n: "./i18n.config.ts",
   },
+  ui: {
+    
+  }
 });
