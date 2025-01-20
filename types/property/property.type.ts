@@ -7,6 +7,7 @@ export type PropertyType = {
   id: string;
   name: string;
   description: string;
+  advisorPhoneNumber: string;
   generalData: GeneralDataType;
   location: LocationType;
   images: ImageType[];

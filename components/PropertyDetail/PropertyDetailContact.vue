@@ -8,12 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { requestInfoAboutProperty } from "~/utils/openRaizcoWhatsapp";
 
-function onClickButton() {
-  const url = encodeURIComponent(window.location.href);
-  requestInfoAboutProperty(url);
-}
 </script>
 
 <style lang="scss" scoped>

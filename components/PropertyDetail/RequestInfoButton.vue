@@ -7,12 +7,16 @@
 </template>
 
 <script setup lang="ts">
+import { usePropertyDetailStore } from "~/store/propertyDetail";
+
+const propertyDetailStore = usePropertyDetailStore();
+
 defineProps({
   secondaryButton: Boolean,
 });
 
 function onClickButton() {
   const url = encodeURIComponent(window.location.href);
-  requestInfoAboutProperty(url);
+  requestInfoAboutProperty(url, propertyDetailStore.data.advisorPhoneNumber);
 }
 </script>
