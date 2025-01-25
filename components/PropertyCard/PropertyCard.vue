@@ -7,6 +7,7 @@
           :class="{ 'property-card__image--no-preview': !data.images.length }"
           :src="data.images.length ? data.images[0].url : NoImage"
           alt="image"
+          lazy
         />
       </article>
       <PropertyCardDetails :data="data" />

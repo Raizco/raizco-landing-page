@@ -35,7 +35,12 @@
             v-if="propertyDetailStore.data.location.address"
           />
           <RaizcoDivider />
-          <PropertyDetailVideo />
+          <PropertyDetailVideo
+            v-if="
+              propertyDetailStore.data.generalData.videoUrl ||
+              propertyDetailStore.data.generalData.video360Url
+            "
+          />
           <PropertyDetailLocation />
         </div>
       </article>
