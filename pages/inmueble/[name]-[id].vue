@@ -70,6 +70,28 @@ watchEffect(() => {
   if (dataExists.value) {
     const property = propertyDetailStore.data;
 
+    useHead({
+      title: property.name,
+      meta: [
+        { name: "description", content: property.description },
+        { property: "og:title", content: property.name },
+        { property: "og:description", content: property.description },
+        { property: "og:image", content: property.images?.[0]?.url || NoImage },
+        {
+          property: "og:url",
+          content: `${window.location.origin}/properties/${propertyId}`,
+        },
+        { property: "og:type", content: "article" },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: property.name },
+        { name: "twitter:description", content: property.description },
+        {
+          name: "twitter:image",
+          content: property.images?.[0]?.url || NoImage,
+        },
+      ],
+    });
+
     useSeoMeta({
       title: () => `${property.name} | Raizco`,
       ogTitle: () => `${property.name} | Raizco`,
