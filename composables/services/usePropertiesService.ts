@@ -7,7 +7,7 @@ export const usePropertiesService = () => {
   ): Promise<any> => {
     try {
       const response = await useAPIFetch(`/properties`, {
-        params: { ...filters, property_status: "654334a18be6c239ec2543fc" },
+        params: { ...filters, property_status: "active" },
       });
       return response;
     } catch (error) {
@@ -25,7 +25,7 @@ export const usePropertiesService = () => {
     try {
       const response = await useAPIFetch(`/properties`, {
         method: "GET",
-        params: { ...filters, property_status: "654334a18be6c239ec2543fc" },
+        params: { ...filters, property_status: "active" },
       });
       return response;
     } catch (error) {
