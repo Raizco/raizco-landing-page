@@ -6,7 +6,7 @@ export const usePropertiesService = () => {
     filters: PropertiesFiltersDto
   ): Promise<any> => {
     try {
-      const response = await useAPIFetch(`/properties`, {
+      const response = await useAPIFetch(`/properties/landing`, {
         params: { ...filters, property_status: "active" },
       });
       return response;
@@ -23,7 +23,7 @@ export const usePropertiesService = () => {
     filters: PropertiesFiltersDto
   ): Promise<any> => {
     try {
-      const response = await useAPIFetch(`/properties`, {
+      const response = await useAPIFetch(`/properties/landing`, {
         method: "GET",
         params: { ...filters, property_status: "active" },
       });
