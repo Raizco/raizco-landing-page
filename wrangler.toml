@@ -1,0 +1,6 @@
+name = "raizco-app"
+type = "javascript"
+
+workers_dev = true
+compatibility_date = "2024-03-07"
+main = "./.output/server/index.mjs"
