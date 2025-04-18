@@ -1,5 +1,5 @@
 import type { PropertiesFiltersDto } from "~/dtos/PropertiesFiltersDto";
-import { useAPI, useAPIFetch } from "./useApi";
+import { useAPI, useAPIAsyncData, useAPIFetch } from "./useApi";
 
 export const usePropertiesService = () => {
   const fetchProperties = async (
@@ -38,7 +38,7 @@ export const usePropertiesService = () => {
   };
 
   const fetchPropertyById = async (id: string): Promise<any> => {
-    const { data, error } = await useAPI(`/properties/${id}`);
+    const { data, error } = await useAPIAsyncData(`/properties/${id}`);
     if (error.value) {
       throw new Error(error.value.message);
     }

@@ -18,6 +18,15 @@ export function useAPIFetch<T>(
   const $api = nuxtApp.$api as typeof $fetch;
   return $api<T>(resolvedUrl, {
     ...options,
-    baseURL: useNuxtApp().$config.public.apiBaseUrl
+    baseURL: useRuntimeConfig().public.apiBaseUrl,
   });
+}
+export function useAPIAsyncData<T>(
+  url: string,
+) {
+  return useAsyncData<T>(url, () =>
+    $fetch(url, {
+      baseURL: useRuntimeConfig().public.apiBaseUrl,
+    })
+  );
 }
