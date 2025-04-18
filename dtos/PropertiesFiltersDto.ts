@@ -3,9 +3,7 @@ import type { RaizcoSelectOption } from "~/components/common/RaizcoSelect/raizco
 import type { PropertiesFilters } from "~/types/property/propertiesFilters.type";
 import type { PropertiesPicklists } from "~/types/property/propertiesPicklists.type";
 import { PropertyManagementType } from "~/types/property/propertyManagement.type";
-// import { usePropertiesStore } from "~/store/properties";
 
-// const propertiesStore = usePropertiesStore();
 export class PropertiesFiltersDto {
   public skip: number;
   public limit: number = 20;
