@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@coders-tm/vue-number-format": "^3.35.2",
-    "@iconify/utils": "^2.3.0",
     "@nuxt/ui": "2.20.0",
     "@nuxtjs/i18n": "9.1.1",
     "@nuxtjs/leaflet": "^1.2.6",
