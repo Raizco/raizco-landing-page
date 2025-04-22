@@ -1,0 +1,4 @@
+const _business__vue_vue_type_style_index_0_scoped_93f6f500_lang = '@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Satisfy&display=swap");[data-v-93f6f500]:root{color-scheme:light}body[data-v-93f6f500]{color:#272727;margin:0;padding:0}.main-content-wrapper[data-v-93f6f500]{margin:20px 0 30px}.properties-section[data-v-93f6f500]{display:flex;gap:35px}@media (width < 700px){.properties-section[data-v-93f6f500]{width:100%}}@media (max-width:720px){.filters-wrapper[data-v-93f6f500]{display:none}}.property-cards-list[data-v-93f6f500]{display:grid;gap:30px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));width:100%}.paginator-wrapper[data-v-93f6f500]{display:flex;justify-content:center;margin-top:30px}';
+
+export { _business__vue_vue_type_style_index_0_scoped_93f6f500_lang as _ };
+//# sourceMappingURL=_business_-styles-1.mjs-na03zzL1.mjs.map

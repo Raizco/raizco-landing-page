@@ -4,21 +4,16 @@
       {{ $t("location") }}
     </h2>
     <RaizcoMap
-      :latitude="property.location.latitude"
-      :longitude="property.location.longitude"
+      :latitude="propertyDetailStore.data.location.latitude"
+      :longitude="propertyDetailStore.data.location.longitude"
     />
   </section>
 </template>
 
 <script setup lang="ts">
-import { type PropertyType } from "../../types/property/property.type";
+import { usePropertyDetailStore } from "~/store/propertyDetail";
 
-defineProps({
-  property: {
-    type: Object as () => PropertyType,
-    required: true,
-  },
-});
+const propertyDetailStore = usePropertyDetailStore();
 </script>
 
 <style lang="scss" scoped>

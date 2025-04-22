@@ -5,24 +5,22 @@
     </h2>
     <div
       class="property-detail-video__url-video"
-      v-if="property.generalData.videoUrl"
+      v-if="propertyDetailStore.data.generalData.videoUrl"
     >
       <iframe
-        :src="formatVideoUrl(property.generalData.videoUrl)"
+        :src="formatVideoUrl(propertyDetailStore.data.generalData.videoUrl)"
         name="Vídeo propiedad"
         title="Video propiedad"
         class="property-detail-video__iframe"
       />
     </div>
-    <RaizcoDivider v-if="property.generalData?.video360Url" />
+    <RaizcoDivider v-if="propertyDetailStore.data.generalData?.video360Url" />
     <div
       class="property-detail-video__360-video"
-      v-if="property.generalData?.video360Url"
+      v-if="propertyDetailStore.data.generalData?.video360Url"
     >
       <iframe
-        :src="
-          formatVideoUrl(property.generalData.video360Url)
-        "
+        :src="formatVideoUrl(propertyDetailStore.data.generalData.video360Url)"
         name="Vídeo propiedad"
         title="Video propiedad"
         class="property-detail-video__iframe"
@@ -32,21 +30,16 @@
 </template>
 
 <script setup lang="ts">
-import { type PropertyType } from "../../types/property/property.type";
+import { usePropertyDetailStore } from "~/store/propertyDetail";
 
-defineProps({
-  property: {
-    type: Object as () => PropertyType,
-    required: true,
-  },
-});
+const propertyDetailStore = usePropertyDetailStore();
 
 function formatVideoUrl(url: string): string {
   if (url.match("youtu.be") && !url.match("embed")) {
     const id = url.split("/")[3];
     return `https://www.youtube.com/embed/${id}`;
   }
-  if(url.match("shorts")) {
+  if (url.match("shorts")) {
     const id = url.split("shorts/")[1];
     return `https://www.youtube.com/embed/${id}`.split("&")[0];
   }

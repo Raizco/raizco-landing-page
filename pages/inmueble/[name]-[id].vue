@@ -1,16 +1,16 @@
 <template>
   <div v-if="propertyDetailStore.data">
-    {{ propertyDetailStore.data }}
-    <!-- <PropertyDetailFooter
+    <PropertyDetailFooter
       :show="!headerIsVisible && $viewport.isLessOrEquals('tablet')"
-      :property="property"
-    /> -->
+    />
     <ContentWrapper>
       <article class="property-detail-page">
         <div>
-          <PropertyDetailHeader ref="headerRef" :property="property" />
-          <!-- <PropertyImages :images="property.images"></PropertyImages> -->
-          <!-- <PropertyDetailMainFeatures :property="property" /> -->
+          <PropertyDetailHeader ref="headerRef" />
+          <PropertyImages
+            :images="propertyDetailStore.data.images"
+          ></PropertyImages>
+          <PropertyDetailMainFeatures />
           <section class="property-information">
             <div class="property-information-wrapper">
               <section
@@ -19,7 +19,7 @@
                 <h2 class="property-detail-section__title">
                   {{ $t("description") }}
                 </h2>
-                <!-- <div v-html="property.description"></div> -->
+                <div v-html="propertyDetailStore.data.description"></div>
               </section>
               <PropertyDetailFeatures />
             </div>
@@ -31,15 +31,17 @@
               <PropertyDetailContact />
             </div>
           </section>
-          <!-- <PropertyDetailAddress v-if="property.location.address" /> -->
-          <RaizcoDivider />
-          <!-- <PropertyDetailVideo
-            v-if="
-              property.generalData.videoUrl || property.generalData.video360Url
-            "
-            :property="property"
+          <PropertyDetailAddress
+            v-if="propertyDetailStore.data.location.address"
           />
-          <PropertyDetailLocation :property="property" /> -->
+          <RaizcoDivider />
+          <PropertyDetailVideo
+            v-if="
+              propertyDetailStore.data.generalData.videoUrl ||
+              propertyDetailStore.data.generalData.video360Url
+            "
+          />
+          <PropertyDetailLocation />
         </div>
       </article>
     </ContentWrapper>
@@ -48,51 +50,33 @@
 
 <script setup lang="ts">
 import { usePropertyDetailStore } from "~/store/propertyDetail";
-import { usePropertyMapper } from "~/composables/mappers/usePropertyMapper";
-import { useAPIAsyncData } from "../../composables/services/useApi";
 import NoImage from "../../assets/images/no-image.png";
-import type { PropertyType } from "~/types/property/property.type";
 
 const route = useRoute();
 const { $viewport } = useNuxtApp();
-const propertyId = route.params.id;
-const property = ref<PropertyType | null>(null);
 const headerRef = ref<HTMLElement | null>(null);
 const headerIsVisible = ref<boolean>(false);
-const { mapProperty } = usePropertyMapper();
 
 const propertyDetailStore = usePropertyDetailStore();
 
 await propertyDetailStore.getPropertyById(route.params.id as string);
 
-
-const { data } = await useAPIAsyncData<PropertyType>(
-  `/properties/${propertyId}`
-);
-
-if (!data.value) {
-  throw createError({
-    statusCode: 404,
-    message: "Property not found",
-    fatal: true,
-  });
-}
-
-property.value = mapProperty(data.value);
-
 const url = useRequestURL();
 const fullUrl = `${url.origin}${route.fullPath}`;
 
-if (property.value) {
+if (Object.keys(propertyDetailStore.data).length) {
   useHead({
-    title: property.value?.name || "",
+    title: propertyDetailStore.data?.name || "",
     meta: [
-      { name: "description", content: property.value.description },
-      { property: "og:title", content: property.value.name },
-      { property: "og:description", content: property.value.description },
+      { name: "description", content: propertyDetailStore.data.description },
+      { property: "og:title", content: propertyDetailStore.data.name },
+      {
+        property: "og:description",
+        content: propertyDetailStore.data.description,
+      },
       {
         property: "og:image",
-        content: property.value.images?.[0]?.url || NoImage,
+        content: propertyDetailStore.data.images?.[0]?.url || NoImage,
       },
       {
         property: "og:url",
@@ -100,25 +84,28 @@ if (property.value) {
       },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: property.value.name },
-      { name: "twitter:description", content: property.value.description },
+      { name: "twitter:title", content: propertyDetailStore.data.name },
+      {
+        name: "twitter:description",
+        content: propertyDetailStore.data.description,
+      },
       {
         name: "twitter:image",
-        content: property.value.images?.[0]?.url || NoImage,
+        content: propertyDetailStore.data.images?.[0]?.url || NoImage,
       },
     ],
   });
 
   useSeoMeta({
-    title: () => `${property.value?.name} | Raizco`,
-    ogTitle: () => `${property.value?.name} | Raizco`,
-    description: () => property.value?.description,
-    ogDescription: () => property.value?.description,
-    ogImage: () => property.value?.images?.[0]?.url || NoImage,
+    title: () => `${propertyDetailStore.data?.name} | Raizco`,
+    ogTitle: () => `${propertyDetailStore.data?.name} | Raizco`,
+    description: () => propertyDetailStore.data?.description,
+    ogDescription: () => propertyDetailStore.data?.description,
+    ogImage: () => propertyDetailStore.data?.images?.[0]?.url || NoImage,
     ogUrl: () => fullUrl,
-    twitterTitle: () => `${property.value?.name} | Raizco`,
-    twitterDescription: () => property.value?.description,
-    twitterImage: () => property.value?.images?.[0]?.url || NoImage,
+    twitterTitle: () => `${propertyDetailStore.data?.name} | Raizco`,
+    twitterDescription: () => propertyDetailStore.data?.description,
+    twitterImage: () => propertyDetailStore.data?.images?.[0]?.url || NoImage,
   });
 }
 

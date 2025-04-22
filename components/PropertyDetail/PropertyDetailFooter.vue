@@ -7,7 +7,7 @@
   >
     <ContentWrapper>
       <article class="property-detail-footer__name">
-        <h1>{{ property.name }}</h1>
+        <h1>{{ propertyDetailStore.data.name }}</h1>
       </article>
       <article class="property-detail-footer__location">
         <span>{{ propertyLocation }}</span>
@@ -29,13 +29,11 @@
 
 <script setup lang="ts">
 import { usePropertyValueWithManagementText } from "~/composables/usePropertyValueWithManagementText";
-import type { PropertyType } from "~/types/property/property.type";
+import { usePropertyDetailStore } from "~/store/propertyDetail";
 
-const props = defineProps({
-  property: {
-    type: Object as () => PropertyType,
-    required: true,
-  },
+const propertyDetailStore = usePropertyDetailStore();
+
+defineProps({
   show: {
     type: Boolean,
     default: false,
@@ -43,10 +41,10 @@ const props = defineProps({
 });
 
 const { propertyValue, propertyManagement } =
-  usePropertyValueWithManagementText(props.property);
+  usePropertyValueWithManagementText(propertyDetailStore.data);
 
 const propertyLocation = computed(() => {
-  return props.property.location?.cityName.toUpperCase() || "";
+  return propertyDetailStore.data.location?.cityName.toUpperCase() || "";
 });
 </script>
 
