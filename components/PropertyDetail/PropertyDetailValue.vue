@@ -7,9 +7,12 @@
 
 <script setup lang="ts">
 import { usePropertyValueWithManagementText } from "~/composables/usePropertyValueWithManagementText";
+import { usePropertyDetailStore } from "~/store/propertyDetail";
+
+const propertyDetailStore = usePropertyDetailStore();
 
 const { propertyValue, propertyManagement } =
-  usePropertyValueWithManagementText();
+  usePropertyValueWithManagementText(propertyDetailStore.data);
 </script>
 
 <style lang="scss" scoped>

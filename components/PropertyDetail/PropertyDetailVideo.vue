@@ -5,23 +5,23 @@
     </h2>
     <div
       class="property-detail-video__url-video"
-      v-if="propertyDetailStore.data.generalData.videoUrl"
+      v-if="property.generalData.videoUrl"
     >
       <iframe
-        :src="formatVideoUrl(propertyDetailStore.data.generalData.videoUrl)"
+        :src="formatVideoUrl(property.generalData.videoUrl)"
         name="Vídeo propiedad"
         title="Video propiedad"
         class="property-detail-video__iframe"
       />
     </div>
-    <RaizcoDivider v-if="propertyDetailStore.data.generalData?.video360Url" />
+    <RaizcoDivider v-if="property.generalData?.video360Url" />
     <div
       class="property-detail-video__360-video"
-      v-if="propertyDetailStore.data.generalData?.video360Url"
+      v-if="property.generalData?.video360Url"
     >
       <iframe
         :src="
-          formatVideoUrl(propertyDetailStore.data.generalData.video360Url)
+          formatVideoUrl(property.generalData.video360Url)
         "
         name="Vídeo propiedad"
         title="Video propiedad"
@@ -32,9 +32,14 @@
 </template>
 
 <script setup lang="ts">
-import { usePropertyDetailStore } from "~/store/propertyDetail";
+import { type PropertyType } from "../../types/property/property.type";
 
-const propertyDetailStore = usePropertyDetailStore();
+defineProps({
+  property: {
+    type: Object as () => PropertyType,
+    required: true,
+  },
+});
 
 function formatVideoUrl(url: string): string {
   if (url.match("youtu.be") && !url.match("embed")) {

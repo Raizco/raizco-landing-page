@@ -22,7 +22,6 @@ const propertyDetailStore = usePropertyDetailStore();
 const propertyLocation = computed(() => {
   return propertyDetailStore.data.location?.cityName.toUpperCase() || "";
 });
-
 </script>
 
 <style lang="scss" scoped>

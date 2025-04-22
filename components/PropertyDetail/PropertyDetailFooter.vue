@@ -7,7 +7,7 @@
   >
     <ContentWrapper>
       <article class="property-detail-footer__name">
-        <h1>{{ propertyDetailStore.data.name }}</h1>
+        <h1>{{ property.name }}</h1>
       </article>
       <article class="property-detail-footer__location">
         <span>{{ propertyLocation }}</span>
@@ -20,7 +20,7 @@
           </p>
         </div>
         <div class="contact-us">
-          <RequestInfoButton secondaryButton/>
+          <RequestInfoButton secondaryButton />
         </div>
       </article>
     </ContentWrapper>
@@ -28,20 +28,26 @@
 </template>
 
 <script setup lang="ts">
-import { usePropertyDetailStore } from "~/store/propertyDetail";
 import { usePropertyValueWithManagementText } from "~/composables/usePropertyValueWithManagementText";
+import type { PropertyType } from "~/types/property/property.type";
 
-defineProps({ show: Boolean });
-
-const { propertyValue, propertyManagement } =
-  usePropertyValueWithManagementText();
-
-const propertyLocation = computed(() => {
-  return propertyDetailStore.data.location?.cityName.toUpperCase() || "";
+const props = defineProps({
+  property: {
+    type: Object as () => PropertyType,
+    required: true,
+  },
+  show: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const propertyDetailStore = usePropertyDetailStore();
+const { propertyValue, propertyManagement } =
+  usePropertyValueWithManagementText(props.property);
 
+const propertyLocation = computed(() => {
+  return props.property.location?.cityName.toUpperCase() || "";
+});
 </script>
 
 <style lang="scss" scoped>
@@ -104,7 +110,7 @@ const propertyDetailStore = usePropertyDetailStore();
   position: absolute;
   right: 0px;
   bottom: 5px;
-//   transform: translateY(-50%);
+  //   transform: translateY(-50%);
   font-weight: 500;
 }
 </style>

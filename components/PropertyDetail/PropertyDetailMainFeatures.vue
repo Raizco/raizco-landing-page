@@ -11,7 +11,7 @@
             {{ $t("builtArea") }}
           </h2>
           <p class="property-main-features-item__text">
-            {{ propertyDetailStore.data.generalData.totalArea }} m²
+            {{ property.generalData.totalArea }} m²
           </p>
         </div>
       </article>
@@ -23,7 +23,7 @@
         <div>
           <h2 class="property-main-features-item__title">{{ $t("rooms") }}</h2>
           <p class="property-main-features-item__text">
-            {{ propertyDetailStore.data.generalData.bedrooms }}
+            {{ property.generalData.bedrooms }}
           </p>
         </div>
       </article>
@@ -39,7 +39,7 @@
             {{ $t("bathrooms") }}
           </h2>
           <p class="property-main-features-item__text">
-            {{ propertyDetailStore.data.generalData.bathrooms }}
+            {{ property.generalData.bathrooms }}
           </p>
         </div>
       </article>
@@ -51,7 +51,7 @@
         <div>
           <h2 class="property-main-features-item__title">{{ $t("garage") }}</h2>
           <p class="property-main-features-item__text">
-            {{ propertyDetailStore.data.generalData.garage }}
+            {{ property.generalData.garage }}
           </p>
         </div>
       </article>
@@ -60,9 +60,14 @@
 </template>
 
 <script setup lang="ts">
-import { usePropertyDetailStore } from "~/store/propertyDetail";
+import { type PropertyType } from "../../types/property/property.type";
 
-const propertyDetailStore = usePropertyDetailStore();
+defineProps({
+  property: {
+    type: Object as () => PropertyType,
+    required: true,
+  },
+});
 </script>
 
 <style lang="scss" scoped>

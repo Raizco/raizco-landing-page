@@ -1,16 +1,16 @@
 <template>
-  <div>
-    <PropertyDetailFooter
+  <div v-if="propertyDetailStore.data">
+    {{ propertyDetailStore.data }}
+    <!-- <PropertyDetailFooter
       :show="!headerIsVisible && $viewport.isLessOrEquals('tablet')"
-    />
+      :property="property"
+    /> -->
     <ContentWrapper>
       <article class="property-detail-page">
-        <div v-if="dataExists">
-          <PropertyDetailHeader ref="headerRef" />
-          <PropertyImages
-            :images="propertyDetailStore.data.images"
-          ></PropertyImages>
-          <PropertyDetailMainFeatures />
+        <div>
+          <PropertyDetailHeader ref="headerRef" :property="property" />
+          <!-- <PropertyImages :images="property.images"></PropertyImages> -->
+          <!-- <PropertyDetailMainFeatures :property="property" /> -->
           <section class="property-information">
             <div class="property-information-wrapper">
               <section
@@ -19,7 +19,7 @@
                 <h2 class="property-detail-section__title">
                   {{ $t("description") }}
                 </h2>
-                <div v-html="propertyDetailStore.data.description"></div>
+                <!-- <div v-html="property.description"></div> -->
               </section>
               <PropertyDetailFeatures />
             </div>
@@ -31,17 +31,15 @@
               <PropertyDetailContact />
             </div>
           </section>
-          <PropertyDetailAddress
-            v-if="propertyDetailStore.data.location.address"
-          />
+          <!-- <PropertyDetailAddress v-if="property.location.address" /> -->
           <RaizcoDivider />
-          <PropertyDetailVideo
+          <!-- <PropertyDetailVideo
             v-if="
-              propertyDetailStore.data.generalData.videoUrl ||
-              propertyDetailStore.data.generalData.video360Url
+              property.generalData.videoUrl || property.generalData.video360Url
             "
+            :property="property"
           />
-          <PropertyDetailLocation />
+          <PropertyDetailLocation :property="property" /> -->
         </div>
       </article>
     </ContentWrapper>
@@ -50,68 +48,82 @@
 
 <script setup lang="ts">
 import { usePropertyDetailStore } from "~/store/propertyDetail";
+import { usePropertyMapper } from "~/composables/mappers/usePropertyMapper";
+import { useAPIAsyncData } from "../../composables/services/useApi";
 import NoImage from "../../assets/images/no-image.png";
+import type { PropertyType } from "~/types/property/property.type";
 
 const route = useRoute();
 const { $viewport } = useNuxtApp();
 const propertyId = route.params.id;
+const property = ref<PropertyType | null>(null);
 const headerRef = ref<HTMLElement | null>(null);
 const headerIsVisible = ref<boolean>(false);
+const { mapProperty } = usePropertyMapper();
 
 const propertyDetailStore = usePropertyDetailStore();
 
-propertyDetailStore.getPropertyById(propertyId as string);
+await propertyDetailStore.getPropertyById(route.params.id as string);
 
-const dataExists = computed(() => {
-  return Object.keys(propertyDetailStore.data).length > 0;
-});
 
-watchEffect(() => {
-  if (dataExists.value) {
-    const property = propertyDetailStore.data;
+const { data } = await useAPIAsyncData<PropertyType>(
+  `/properties/${propertyId}`
+);
 
-    useHead({
-      title: property.name,
-      meta: [
-        { name: "description", content: property.description },
-        { property: "og:title", content: property.name },
-        { property: "og:description", content: property.description },
-        { property: "og:image", content: property.images?.[0]?.url || NoImage },
-        {
-          property: "og:url",
-          content: `${window.location.origin}/properties/${propertyId}`,
-        },
-        { property: "og:type", content: "article" },
-        { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: property.name },
-        { name: "twitter:description", content: property.description },
-        {
-          name: "twitter:image",
-          content: property.images?.[0]?.url || NoImage,
-        },
-      ],
-    });
+if (!data.value) {
+  throw createError({
+    statusCode: 404,
+    message: "Property not found",
+    fatal: true,
+  });
+}
 
-    useSeoMeta({
-      title: () => `${property.name} | Raizco`,
-      ogTitle: () => `${property.name} | Raizco`,
-      description: () => property.description,
-      ogDescription: () => property.description,
-      ogImage: () => property.images?.[0]?.url || NoImage,
-      ogUrl: () => `${window.location.origin}/properties/${propertyId}`,
-      twitterTitle: () => `${property.name} | Raizco`,
-      twitterDescription: () => property.description,
-      twitterImage: () => property.images?.[0]?.url || NoImage,
-    });
-  }
-});
+property.value = mapProperty(data.value);
+
+const url = useRequestURL();
+const fullUrl = `${url.origin}${route.fullPath}`;
+
+if (property.value) {
+  useHead({
+    title: property.value?.name || "",
+    meta: [
+      { name: "description", content: property.value.description },
+      { property: "og:title", content: property.value.name },
+      { property: "og:description", content: property.value.description },
+      {
+        property: "og:image",
+        content: property.value.images?.[0]?.url || NoImage,
+      },
+      {
+        property: "og:url",
+        content: fullUrl,
+      },
+      { property: "og:type", content: "article" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: property.value.name },
+      { name: "twitter:description", content: property.value.description },
+      {
+        name: "twitter:image",
+        content: property.value.images?.[0]?.url || NoImage,
+      },
+    ],
+  });
+
+  useSeoMeta({
+    title: () => `${property.value?.name} | Raizco`,
+    ogTitle: () => `${property.value?.name} | Raizco`,
+    description: () => property.value?.description,
+    ogDescription: () => property.value?.description,
+    ogImage: () => property.value?.images?.[0]?.url || NoImage,
+    ogUrl: () => fullUrl,
+    twitterTitle: () => `${property.value?.name} | Raizco`,
+    twitterDescription: () => property.value?.description,
+    twitterImage: () => property.value?.images?.[0]?.url || NoImage,
+  });
+}
 
 useIntersectionObserver(headerRef, ([entry]) => {
   headerIsVisible.value = entry?.isIntersecting;
-});
-
-onUnmounted(() => {
-  propertyDetailStore.resetData();
 });
 </script>
 

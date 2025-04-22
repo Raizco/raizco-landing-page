@@ -1,15 +1,13 @@
-import { usePropertyDetailStore } from "~/store/propertyDetail";
+import type { PropertyType } from "~/types/property/property.type";
 import {
   BackendPropertyManagementType,
   PropertyManagementType,
 } from "~/types/property/propertyManagement.type";
 
-export function usePropertyValueWithManagementText() {
-  const propertyDetailStore = usePropertyDetailStore();
-
+export function usePropertyValueWithManagementText(property: PropertyType) {
   const propertyManagement = computed(() => {
     let value: string;
-    const management = propertyDetailStore.data.generalData?.management;
+    const management = property.generalData?.management;
     if(!management) return capitalizeFirstLetter(PropertyManagementType.SALE);
     if (
       management.some((item) => item === BackendPropertyManagementType.RENT)
@@ -23,14 +21,14 @@ export function usePropertyValueWithManagementText() {
 
   const propertyValue = computed(() => {
     let value;
-    const management = propertyDetailStore.data.generalData?.management;
+    const management = property.generalData?.management;
     if(!management) return "$0";
     if (
       management.some((item) => item === BackendPropertyManagementType.RENT)
     ) {
-      value = propertyDetailStore.data.generalData.rentValue;
+      value = property.generalData.rentValue;
     } else {
-      value = propertyDetailStore.data.generalData.saleValue;
+      value = property.generalData.saleValue;
     }
     return `$${addDotsToValue(value!)}`;
   });
