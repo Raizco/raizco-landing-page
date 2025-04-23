@@ -51,6 +51,8 @@
 <script setup lang="ts">
 import { usePropertyDetailStore } from "~/store/propertyDetail";
 import NoImage from "../../assets/images/no-image.png";
+import { useAPIAsyncData } from "~/composables/services/useApi";
+import { usePropertyMapper } from "~/composables/mappers/usePropertyMapper";
 
 const route = useRoute();
 const { $viewport } = useNuxtApp();
@@ -59,55 +61,61 @@ const headerIsVisible = ref<boolean>(false);
 
 const propertyDetailStore = usePropertyDetailStore();
 
-await propertyDetailStore.getPropertyById(route.params.id as string);
+const { data, error } = await useAPIAsyncData(`/properties/${route.params.id}`);
+
+if (error.value) {
+  throw createError({ statusCode: 404, message: "Propiedad no encontrada" });
+}
+
+const { mapProperty } = usePropertyMapper();
+const mappedProperty = mapProperty(data.value);
+propertyDetailStore.data = mappedProperty;
 
 const url = useRequestURL();
 const fullUrl = `${url.origin}${route.fullPath}`;
 
-if (Object.keys(propertyDetailStore.data).length) {
-  useHead({
-    title: propertyDetailStore.data?.name || "",
-    meta: [
-      { name: "description", content: propertyDetailStore.data.description },
-      { property: "og:title", content: propertyDetailStore.data.name },
-      {
-        property: "og:description",
-        content: propertyDetailStore.data.description,
-      },
-      {
-        property: "og:image",
-        content: propertyDetailStore.data.images?.[0]?.url || NoImage,
-      },
-      {
-        property: "og:url",
-        content: fullUrl,
-      },
-      { property: "og:type", content: "article" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: propertyDetailStore.data.name },
-      {
-        name: "twitter:description",
-        content: propertyDetailStore.data.description,
-      },
-      {
-        name: "twitter:image",
-        content: propertyDetailStore.data.images?.[0]?.url || NoImage,
-      },
-    ],
-  });
+useHead({
+  title: mappedProperty.name || "",
+  meta: [
+    { name: "description", content: mappedProperty.description },
+    { property: "og:title", content: mappedProperty.name },
+    {
+      property: "og:description",
+      content: mappedProperty.description,
+    },
+    {
+      property: "og:image",
+      content: mappedProperty.images?.[0]?.url || NoImage,
+    },
+    {
+      property: "og:url",
+      content: fullUrl,
+    },
+    { property: "og:type", content: "article" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: mappedProperty.name },
+    {
+      name: "twitter:description",
+      content: mappedProperty.description,
+    },
+    {
+      name: "twitter:image",
+      content: mappedProperty.images?.[0]?.url || NoImage,
+    },
+  ],
+});
 
-  useSeoMeta({
-    title: () => `${propertyDetailStore.data?.name} | Raizco`,
-    ogTitle: () => `${propertyDetailStore.data?.name} | Raizco`,
-    description: () => propertyDetailStore.data?.description,
-    ogDescription: () => propertyDetailStore.data?.description,
-    ogImage: () => propertyDetailStore.data?.images?.[0]?.url || NoImage,
-    ogUrl: () => fullUrl,
-    twitterTitle: () => `${propertyDetailStore.data?.name} | Raizco`,
-    twitterDescription: () => propertyDetailStore.data?.description,
-    twitterImage: () => propertyDetailStore.data?.images?.[0]?.url || NoImage,
-  });
-}
+useSeoMeta({
+  title: () => `${mappedProperty.name} | Raizco`,
+  ogTitle: () => `${mappedProperty.name} | Raizco`,
+  description: () => mappedProperty.description,
+  ogDescription: () => mappedProperty.description,
+  ogImage: () => mappedProperty.images?.[0]?.url || NoImage,
+  ogUrl: () => fullUrl,
+  twitterTitle: () => `${mappedProperty.name} | Raizco`,
+  twitterDescription: () => mappedProperty.description,
+  twitterImage: () => mappedProperty.images?.[0]?.url || NoImage,
+});
 
 useIntersectionObserver(headerRef, ([entry]) => {
   headerIsVisible.value = entry?.isIntersecting;
