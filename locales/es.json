@@ -21,6 +21,7 @@
     "internal": "Internas",
     "external": "Externas",
     "applyFilters": "Aplicar filtros",
+    "removeFilters": "Limpiar filtros",
     "description": "Descripción",
     "location": "Ubicación",
     "address": "Dirección",

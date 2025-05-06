@@ -1,7 +1,7 @@
 <template>
   <nav class="filters">
     <h2 class="filters__title">{{ $t("filters") }}</h2>
-    <section class="filters__content">
+    <section class="filters__content" :key="renderKey">
       <div class="filters-wrapper">
         <article>
           <h3 class="filter-item__title">{{ $t("propertyType") }}:</h3>
@@ -66,8 +66,18 @@
           v-model="propertiesStore.filters.externalFeatures"
         />
       </article>
-      <div class="apply-filters">
-        <RaizcoButton :text="$t('applyFilters')" @click="onApplyFilters" />
+      <div class="apply-filters-toolbar">
+        <RaizcoButton
+          class="apply-filters-toolbar__button"
+          :text="$t('applyFilters')"
+          @click="onApplyFilters"
+        />
+        <RaizcoButton
+          class="apply-filters-toolbar__button"
+          secondary
+          :text="$t('removeFilters')"
+          @click="onRemoveFilters"
+        />
       </div>
     </section>
   </nav>
@@ -77,6 +87,8 @@
 import type { RaizcoMultipleSelectorOption } from "../common/RaizcoMultipleSelector/raizcoMultipleSelector.types";
 import type { RaizcoSelectOption } from "../common/RaizcoSelect/raizcoSelect.types";
 import { usePropertiesStore } from "~/store/properties";
+
+const renderKey = ref(0);
 
 const emits = defineEmits(["filtersApplied"]);
 
@@ -109,6 +121,15 @@ function onChangeGarages(value: RaizcoMultipleSelectorOption[]) {
 function onApplyFilters() {
   propertiesStore.page = 1;
   propertiesStore.getPropertiesWithFilters();
+  emits("filtersApplied");
+}
+
+function onRemoveFilters() {
+  const propertyManagement = propertiesStore.filters.propertyManagement;
+  propertiesStore.page = 1;
+  propertiesStore.resetFilters({ propertyManagement: propertyManagement });
+  propertiesStore.getPropertiesWithFilters();
+  renderKey.value += 1;
   emits("filtersApplied");
 }
 
@@ -171,10 +192,17 @@ const multipleSelectorOptions = [
   @include filter-item;
 }
 
-.apply-filters {
+.apply-filters-toolbar {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 10px;
   margin-top: 10px;
+}
+
+:deep(.apply-filters-toolbar__button) {
+  min-width: 140px;
 }
 
 .filters-divider {

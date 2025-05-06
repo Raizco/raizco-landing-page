@@ -30,6 +30,14 @@ const props = defineProps<RaizcoMultipleSelectorProps>();
 const selectorId = props.id || generateComponentId({ prefix: "input" });
 const selectedOptions = ref<RaizcoMultipleSelectorOption[]>(setDefaultValue());
 
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    selectedOptions.value = newValue || setDefaultValue();
+  },
+  { immediate: true }
+);
+
 const itemIsSelected = (item: RaizcoMultipleSelectorOption) =>
   selectedOptions.value?.some((option) => option.value === item.value);
 

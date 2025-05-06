@@ -52,8 +52,10 @@ export const usePropertiesStore = defineStore("properties", {
       const response = await fetchPicklists();
       this.picklists = mapPicklists(response);
     },
-    resetFilters() {
-      this.filters = {} as PropertiesFilters;
+    resetFilters(filters?: Partial<PropertiesFilters>): void {
+      this.filters = {
+        ...filters,
+      } as PropertiesFilters;
     },
   },
 });

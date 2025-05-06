@@ -18,7 +18,7 @@ export class PropertiesFiltersDto {
   public area_to?: number;
   public bedrooms?: number[];
   public bathrooms?: number[];
-  public garages?: number[];
+  public garage?: number[];
   public property_status?: string;
   public internal_features?: string[];
   public external_features?: string[];
@@ -60,7 +60,7 @@ export class PropertiesFiltersDto {
       this.external_features = this.setArrayOfIds(externalFeatures);
     if (bedrooms) this.bedrooms = this.setQuantityArray(bedrooms);
     if (bathrooms) this.bathrooms = this.setQuantityArray(bathrooms);
-    if (garages) this.garages = this.setQuantityArray(garages);
+    if (garages) this.garage = this.setQuantityArray(garages);
   }
 
   static create(
