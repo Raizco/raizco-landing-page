@@ -3,12 +3,16 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
   ssr: true,
-   nitro: {
+  nitro: {
     externals: {
-      external: ['leaflet']
-    }
+      external: ["leaflet"],
+    },
   },
   vite: {
+    define: {
+      "L.Icon.Default.imagePath":
+        '"https://unpkg.com/leaflet@1.9.3/dist/images/"',
+    },
     css: {
       preprocessorOptions: {
         scss: {
@@ -29,7 +33,11 @@ export default defineNuxtConfig({
       apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
     },
   },
-  plugins: ["~/plugins/clickOutside.ts", "~/plugins/api.ts", "~/plugins/uiColorTheme.ts"],
+  plugins: [
+    "~/plugins/clickOutside.ts",
+    "~/plugins/api.ts",
+    "~/plugins/uiColorTheme.ts",
+  ],
   components: [
     {
       path: "~/components",
@@ -68,7 +76,7 @@ export default defineNuxtConfig({
         "xmark",
         "bars",
         "phone",
-        "clock"
+        "clock",
       ],
     },
   },
