@@ -85,7 +85,7 @@ useHead({
     },
     {
       property: "og:image",
-      content: mappedProperty.images?.[0]?.url || NoImage,
+      content: `${mappedProperty.images?.[0]?.url}.jpg` || NoImage,
     },
     {
       property: "og:url",
@@ -100,7 +100,7 @@ useHead({
     },
     {
       name: "twitter:image",
-      content: mappedProperty.images?.[0]?.url || NoImage,
+      content: `${mappedProperty.images?.[0]?.url}.jpg` || NoImage,
     },
   ],
 });
@@ -110,11 +110,11 @@ useSeoMeta({
   ogTitle: () => `${mappedProperty.name} | Raizco`,
   description: () => mappedProperty.description,
   ogDescription: () => mappedProperty.description,
-  ogImage: () => mappedProperty.images?.[0]?.url || NoImage,
+  ogImage: () => `${mappedProperty.images?.[0]?.url}.jpg` || NoImage,
   ogUrl: () => fullUrl,
   twitterTitle: () => `${mappedProperty.name} | Raizco`,
   twitterDescription: () => mappedProperty.description,
-  twitterImage: () => mappedProperty.images?.[0]?.url || NoImage,
+  twitterImage: () => `${mappedProperty.images?.[0]?.url}.jpg` || NoImage,
 });
 
 useIntersectionObserver(headerRef, ([entry]) => {
