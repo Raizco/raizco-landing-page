@@ -1,4 +1,0 @@
-const RaizcoModal_vue_vue_type_style_index_0_scoped_d3e54cb4_lang = '@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Satisfy&display=swap");[data-v-d3e54cb4]:root{color-scheme:light}body[data-v-d3e54cb4]{color:#272727;margin:0;padding:0}.raizco-modal-header[data-v-d3e54cb4]{background-color:hsla(0,0%,79%,.282);padding:15px 20px 0}.raizco-modal-header__content-wrapper[data-v-d3e54cb4]{align-items:center;display:flex;padding-bottom:5px;position:relative}.raizco-modal-header__title[data-v-d3e54cb4]{font-size:1.3rem;font-weight:600}.raizco-modal-header__close-button[data-v-d3e54cb4]{font-size:20px;position:absolute;right:0}';
-
-export { RaizcoModal_vue_vue_type_style_index_0_scoped_d3e54cb4_lang as R };
-//# sourceMappingURL=RaizcoModal-styles-1.mjs-DNq0uF32.mjs.map

@@ -1,4 +1,0 @@
-const Footer_vue_vue_type_style_index_0_scoped_af0de633_lang = '@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Satisfy&display=swap");[data-v-af0de633]:root{color-scheme:light}body[data-v-af0de633]{color:#272727;margin:0;padding:0}.footer-content[data-v-af0de633]{background-color:#000;padding:20px}.footer-brand[data-v-af0de633]{background-color:#f6b800;font-weight:500;padding:7px 0}.contact-info__title[data-v-af0de633]{color:#f6b800;font-size:18px;font-weight:600;margin-bottom:5px}.contact-info-list[data-v-af0de633]{display:flex;flex-direction:column;gap:2px}.contact-info-list__item[data-v-af0de633]{align-items:center;color:#fff;display:flex;gap:7px}';
-
-export { Footer_vue_vue_type_style_index_0_scoped_af0de633_lang as F };
-//# sourceMappingURL=Footer-styles-1.mjs-CWUyso-H.mjs.map

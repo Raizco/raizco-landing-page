@@ -1,4 +1,0 @@
-const PropertyDetailHeader_vue_vue_type_style_index_0_scoped_f353cc12_lang = '@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Satisfy&display=swap");[data-v-f353cc12]:root{color-scheme:light}body[data-v-f353cc12]{color:#272727;margin:0;padding:0}.property-detail-header[data-v-f353cc12]{margin-bottom:10px}.property-detail-header__name[data-v-f353cc12]{color:#272727;font-size:27px;font-weight:700}.property-detail-header__location[data-v-f353cc12]{align-items:baseline;display:flex;font-size:16px;gap:5px}.property-detail-header__location-icon[data-v-f353cc12]{color:#f6b800;font-size:16px}';
-
-export { PropertyDetailHeader_vue_vue_type_style_index_0_scoped_f353cc12_lang as P };
-//# sourceMappingURL=PropertyDetailHeader-styles-1.mjs-D79Kta0c.mjs.map
