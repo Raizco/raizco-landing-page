@@ -20,7 +20,7 @@
     "@vue/runtime-core": "3.5.13",
     "@vueuse/nuxt": "^12.4.0",
     "axios": "1.7.9",
-    "nuxt": "3.14.1592",
+    "nuxt": "3.15.0",
     "nuxt-viewport": "^2.2.0",
     "vue": "latest",
     "vue-router": "latest",
