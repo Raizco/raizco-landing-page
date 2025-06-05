@@ -1,25 +1,27 @@
 <template>
   <div class="raizco-map">
-    <LMap
-      ref="map"
-      :zoom="zoom || 15"
-      :center="[latitude || 6.244747, longitude || -75.57482]"
-      :use-global-leaflet="false"
-    >
-      <LTileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&amp;copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-        layer-type="base"
-        name="OpenStreetMap"
-      />
-      <LMarker
-        v-if="latitude && longitude"
-        :lat-lng="[latitude, longitude]"
-        :draggable="draggableMarker"
+    <client-only>
+      <LMap
+        ref="map"
+        :zoom="zoom || 15"
+        :center="[latitude || 6.244747, longitude || -75.57482]"
+        :use-global-leaflet="false"
       >
-      <LIcon :icon-url="icon || DefaultIcon" :icon-size="[32, 55]"></LIcon>
-      </LMarker>
-    </LMap>
+        <LTileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&amp;copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+          layer-type="base"
+          name="OpenStreetMap"
+        />
+        <LMarker
+          v-if="latitude && longitude"
+          :lat-lng="[latitude, longitude]"
+          :draggable="draggableMarker"
+        >
+          <LIcon :icon-url="icon || DefaultIcon" :icon-size="[32, 55]"></LIcon>
+        </LMarker>
+      </LMap>
+    </client-only>
   </div>
 </template>
 
