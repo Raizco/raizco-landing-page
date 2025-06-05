@@ -20,6 +20,3 @@ jobs:
           git config --global user.email "mirror-bot@example.com"
           git remote add mirror $MIRROR_URL
           git push --force mirror main
-
-
-3JW4XSWpRrrczxXHHzZqDClUIaTrZumYVR4ffoPiiYDVm834MpBSjEBORM8H5Um1
