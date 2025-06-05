@@ -2,3 +2,6 @@ name = "raizco-nuxt-app"
 main = "dist/_worker.js"
 compatibility_date = "2024-11-01"
 workers_dev = true
+
+[env.production.vars]
+NUXT_PUBLIC_API_URL = "https://raizco-core.site"
