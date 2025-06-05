@@ -1,0 +1,25 @@
+name: Mirror repo to personal
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Push to personal mirror
+        env:
+          MIRROR_URL: https://Raizco:${{ secrets.MIRROR_PUSH_TOKEN }}@github.com/Raizco/raizco-landing-page.git
+        run: |
+          git config --global user.name "mirror-bot"
+          git config --global user.email "mirror-bot@example.com"
+          git remote add mirror $MIRROR_URL
+          git push --force mirror main
+
+
+3JW4XSWpRrrczxXHHzZqDClUIaTrZumYVR4ffoPiiYDVm834MpBSjEBORM8H5Um1
