@@ -28,7 +28,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     apiSecret: "123",
     public: {
-      apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL || "https://raizco-core.site",
+      apiBaseUrl: "https://raizco-core.site",
     },
   },
   plugins: [
