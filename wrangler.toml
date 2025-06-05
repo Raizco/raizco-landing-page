@@ -1,7 +1,4 @@
-name = "raizco-landing-page"
-account_id = "TU_ACCOUNT_ID"
-compatibility_date = "2024-06-05"
-main = "dist/server/index.mjs"
-
-[site]
-bucket = "dist/client"
+name = "raizco-nuxt-app"
+main = "dist/_worker.js"
+compatibility_date = "2024-11-01"
+workers_dev = true
