@@ -3,17 +3,6 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
   ssr: true,
-  nitro: {
-    publicAssets: [
-      {
-        baseURL: "/locales",
-        dir: "./locales",
-      },
-    ],
-    externals: {
-      inline: ['./i18n.config.ts']
-    }
-  },
   vite: {
     define: {
       "L.Icon.Default.imagePath":
