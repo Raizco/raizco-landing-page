@@ -14,7 +14,7 @@ jobs:
 
       - name: Push to personal mirror
         env:
-          MIRROR_URL: https://Raizco:${{ secrets.MIRROR_PUSH_TOKEN }}@github.com/Raizco/raizco-landing-page.git
+          MIRROR_URL: https://${{ secrets.MIRROR_PUSH_TOKEN }}@github.com/Raizco/raizco-landing-page.git
         run: |
           git config --global user.name "mirror-bot"
           git config --global user.email "mirror-bot@example.com"
